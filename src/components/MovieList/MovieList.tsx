@@ -6,7 +6,6 @@ import Loader from "@/components/Loader";
 
 function MovieList() {
 	const { movies, isLoading, error } = useMovies();
-	console.log("🚀 ~ MovieList ~ movies:", movies);
 
 	if (isLoading) {
 		return <Loader />;

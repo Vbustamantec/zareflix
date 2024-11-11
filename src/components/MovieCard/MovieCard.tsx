@@ -9,7 +9,7 @@ interface MovieCardProps {
 
 function MovieCard({ movie }: MovieCardProps) {
 	return (
-		<div className="movie-card p-4 bg-gray-800 rounded-md">
+		<div className="movie-card p-4 bg-dark-gray rounded-md">
 			<div className="relative w-full h-96 mb-2 flex justify-center items-center">
 				<Image
 					src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}

@@ -8,18 +8,18 @@ interface MovieCardProps {
 }
 
 function MovieCard({ movie }: MovieCardProps) {
-	console.log("🚀 ~ MovieCard ~ movie:", movie);
 	return (
 		<div className="movie-card p-4 bg-gray-800 rounded-md">
-			<div className="relative w-full h-64 mb-2">
+			<div className="relative w-full h-96 mb-2 flex justify-center items-center">
 				<Image
 					src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
 					alt={movie.Title}
 					fill
-					className="object-cover rounded-md"
+					className="object-cover object-center rounded-md"
 				/>
 			</div>
-			<h3 className="text-white text-lg">{movie.Title}</h3>
+			<h3 className="text-white text-xl text-center">{movie.Title}</h3>
+			<p className="text-gray-400 text-sm text-center">{movie.Year}</p>
 		</div>
 	);
 }

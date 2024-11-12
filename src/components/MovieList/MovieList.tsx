@@ -1,6 +1,9 @@
 "use client";
+
 import React from "react";
+
 import { useMovies } from "@/context/MoviesContext";
+
 import MovieCard from "@/components/MovieCard/MovieCard";
 import Loader from "@/components/Loader";
 

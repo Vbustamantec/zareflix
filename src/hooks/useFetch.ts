@@ -1,5 +1,6 @@
-// hooks/useFetch.ts
 import { useState, useEffect } from "react";
+
+// Cambiar a SSR
 
 function useFetch<T>(url: string | null, options?: RequestInit) {
 	const [data, setData] = useState<T | null>(null);

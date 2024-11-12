@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { useMovies } from "@/context/MoviesContext";
-import { searchMovies } from "@/utils/api";
+import { searchMovies } from "services/api";
 
 export default function useSearch() {
 	const [searchQuery, setSearchQuery] = useState("");

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { getMovieById } from "@/utils/api";
+import { getMovieById } from "services/api";
 import { Movie } from "@/types/movies";
 
 async function getMovie(id: string) {

@@ -1,36 +1,40 @@
-import { useState, useEffect, useCallback } from "react";
-import useFetch from "./useFetch";
+import { useState, useCallback, useRef } from "react";
 import { useMovies } from "@/context/MoviesContext";
-import { Movie } from "@/types/movies";
+import { searchMovies } from "@/utils/api";
 
-function useSearch() {
-	const [searchQuery, setSearchQuery] = useState<string>("");
-	const [apiUrl, setApiUrl] = useState<string | null>(null);
+export default function useSearch() {
+	const [searchQuery, setSearchQuery] = useState("");
+	const { setMovies, setIsLoading, setError } = useMovies();
+	const lastSearchRef = useRef("");
 
-	const { setMovies, setOmdbData, setError, setIsLoading } = useMovies();
+	const handleSearch = useCallback(async () => {
+		const trimmedQuery = searchQuery.trim();
 
-	const { data, isLoading, error } = useFetch<{
-		Response: string;
-		Search: Movie[];
-		Error?: string;
-	}>(apiUrl);
+		if (trimmedQuery === "") {
+			setError("Please enter a movie title to search.");
+			return;
+		}
 
-	useEffect(() => {
-		setIsLoading(isLoading);
-		setError(error);
+		// Evitar búsquedas duplicadas consecutivas
+		if (trimmedQuery === lastSearchRef.current) {
+			return;
+		}
 
-		if (data?.Response === "True") {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			setOmdbData(data as any);
+		setIsLoading(true);
+		setError(null);
+
+		try {
+			const data = await searchMovies(searchQuery);
 			setMovies(data.Search);
-		} else if (data) {
+		} catch (error) {
 			setError(
-				data.Error || "Movie not found, try searching for another movie."
+				error instanceof Error ? error.message : "Failed to fetch movies"
 			);
 			setMovies([]);
-			setOmdbData([]);
+		} finally {
+			setIsLoading(false);
 		}
-	}, [data, isLoading, error, setError, setIsLoading, setMovies, setOmdbData]);
+	}, [searchQuery, setMovies, setIsLoading, setError]);
 
 	const handleInputChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,19 +42,6 @@ function useSearch() {
 		},
 		[]
 	);
-
-	const handleSearch = useCallback(() => {
-		if (searchQuery.trim() === "") {
-			setError("Please enter a movie title to search.");
-			return;
-		}
-
-		const API_URL = `https://www.omdbapi.com/?apikey=${
-			process.env.NEXT_PUBLIC_OMDB_API_KEY
-		}&s=${encodeURIComponent(searchQuery)}`;
-		setApiUrl(API_URL);
-		setError(null);
-	}, [searchQuery, setError]);
 
 	const handleKeyPress = useCallback(
 		(e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -68,5 +59,3 @@ function useSearch() {
 		handleSearch,
 	};
 }
-
-export default useSearch;

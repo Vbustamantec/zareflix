@@ -1,6 +1,6 @@
 "use client";
-
 import React, { createContext, useContext, useState, ReactNode } from "react";
+
 import { Movie } from "@/types/movies";
 import { OmdbData } from "@/types/omdbData";
 

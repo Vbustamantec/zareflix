@@ -19,8 +19,8 @@ function SearchInput({
 			onChange={handleInputChange}
 			onKeyDown={handleKeyPress}
 			className="p-3 rounded-md text-black w-full"
-			placeholder="Buscar una película..."
-			aria-label="Buscar una película"
+			placeholder="Search for a movie..."
+			aria-label="Search for a movie"
 			id="search-input"
 		/>
 	);

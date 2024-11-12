@@ -12,11 +12,19 @@ function MovieList() {
 	}
 
 	if (error) {
-		return <p className="text-red-500 mt-2">{error}</p>;
+		return (
+			<p className="text-red-500 mt-2 lg:mt-12 text-center text-3xl font-bold">
+				{error}
+			</p>
+		);
 	}
 
 	if (movies.length === 0) {
-		return <p>No hay películas para mostrar. Realiza una búsqueda.</p>;
+		return (
+			<p className="text-white lg:mt-12 text-center text-3xl font-bold">
+				There are no movies to show yet 😢
+			</p>
+		);
 	}
 
 	return (

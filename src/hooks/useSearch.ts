@@ -1,53 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import useFetch from "./useFetch";
 import { useMovies } from "@/context/MoviesContext";
+import { Movie } from "@/types/movies";
 
 function useSearch() {
 	const [searchQuery, setSearchQuery] = useState<string>("");
+	const [apiUrl, setApiUrl] = useState<string | null>(null);
 
 	const { setMovies, setOmdbData, setError, setIsLoading } = useMovies();
 
-	const handleSearch = async () => {
+	const { data, isLoading, error } = useFetch<{
+		Response: string;
+		Search: Movie[];
+		Error?: string;
+	}>(apiUrl);
+
+	useEffect(() => {
+		setIsLoading(isLoading);
+		setError(error);
+
+		if (data?.Response === "True") {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			setOmdbData(data as any);
+			setMovies(data.Search);
+		} else if (data) {
+			setError(
+				data.Error || "Movie not found, try searching for another movie."
+			);
+			setMovies([]);
+			setOmdbData([]);
+		}
+	}, [data, isLoading, error, setError, setIsLoading, setMovies, setOmdbData]);
+
+	const handleInputChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setSearchQuery(e.target.value);
+		},
+		[]
+	);
+
+	const handleSearch = useCallback(() => {
 		if (searchQuery.trim() === "") {
-			setError("Por favor, ingresa un término de búsqueda.");
+			setError("Please enter a movie title to search.");
 			return;
 		}
 
-		setIsLoading(true);
+		const API_URL = `https://www.omdbapi.com/?apikey=${
+			process.env.NEXT_PUBLIC_OMDB_API_KEY
+		}&s=${encodeURIComponent(searchQuery)}`;
+		setApiUrl(API_URL);
 		setError(null);
+	}, [searchQuery, setError]);
 
-		try {
-			const API_URL = `https://www.omdbapi.com/?apikey=${
-				process.env.NEXT_PUBLIC_OMDB_API_KEY
-			}&s=${encodeURIComponent(searchQuery)}`;
-
-			const response = await fetch(API_URL);
-			const data = await response.json();
-			if (data.Response === "True") {
-				setOmdbData(data);
-				setMovies(data.Search);
-			} else {
-				setError("No se encontraron películas con ese término de búsqueda.");
-				setMovies([]);
+	const handleKeyPress = useCallback(
+		(e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (e.key === "Enter") {
+				handleSearch();
 			}
-		} catch (error) {
-			console.error("Error al obtener las películas:", error);
-			setError(
-				"Ocurrió un error al realizar la búsqueda. Por favor, intenta nuevamente."
-			);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchQuery(e.target.value);
-	};
-
-	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Enter") {
-			handleSearch();
-		}
-	};
+		},
+		[handleSearch]
+	);
 
 	return {
 		searchQuery,

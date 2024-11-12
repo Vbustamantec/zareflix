@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-import { Movie } from "@/types/movies";
 import Image from "next/image";
+import Link from "next/link";
 
-interface MovieCardProps {
-	movie: Movie;
-}
+import { MovieCardProps } from "./MovieCard.types";
 
 function MovieCard({ movie }: MovieCardProps) {
 	return (
@@ -18,8 +16,16 @@ function MovieCard({ movie }: MovieCardProps) {
 					className="object-cover object-center rounded-md"
 				/>
 			</div>
-			<h3 className="text-white text-xl text-center">{movie.Title}</h3>
-			<p className="text-gray-400 text-sm text-center">{movie.Year}</p>
+			<div className="flex flex-col gap-2">
+				<h3 className="text-white text-xl text-center">{movie.Title}</h3>
+				<p className="text-gray-400 text-sm text-center">{movie.Year}</p>
+				<Link
+					href={`/movie/${movie.imdbID}`}
+					className="bg-red-800 text-white p-3 rounded-md text-center"
+				>
+					More Info
+				</Link>
+			</div>
 		</div>
 	);
 }

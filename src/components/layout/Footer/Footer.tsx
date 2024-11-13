@@ -8,7 +8,7 @@ export default function Footer() {
 			<div className="max-w-full mx-auto px-4 py-8">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
 					<div className="space-y-4 flex flex-col items-center md:items-start">
-						<h3 className="text-white text-lg font-bold">About ZareFlix</h3>
+						<h2 className="text-white text-lg font-bold">About ZareFlix</h2>
 						<p className="text-gray-400 text-sm text-center md:text-left">
 							Your destination to explore and discover movies. We use the OMDB
 							API to provide you with detailed information about thousands of
@@ -26,7 +26,7 @@ export default function Footer() {
 					</div>
 
 					<div className="space-y-4 ">
-						<h3 className="text-white text-lg font-bold">Technologies</h3>
+						<h2 className="text-white text-lg font-bold">Technologies</h2>
 						<ul className="space-y-2 text-sm">
 							<li className="text-gray-400">Next.js</li>
 							<li className="text-gray-400">React</li>

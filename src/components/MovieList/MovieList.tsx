@@ -5,13 +5,13 @@ import React from "react";
 import { useMovies } from "@/context/MoviesContext";
 
 import MovieCard from "@/components/MovieCard/MovieCard";
-import Loader from "@/components/ui/Loader";
+import { SkeletonList } from "../ui/Skeleton";
 
 function MovieList() {
 	const { movies, isLoading, error } = useMovies();
 
 	if (isLoading) {
-		return <Loader />;
+		return <SkeletonList />;
 	}
 
 	if (error) {

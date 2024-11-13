@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import useSearch from "@/hooks/useSearch";
-import SearchInput from "@/components/ui/Input/Input";
-import SearchButton from "@/components/ui/Button/Button";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 export function SearchBox() {
 	const { searchQuery, handleInputChange, handleKeyPress, handleSearch } =
@@ -11,12 +11,12 @@ export function SearchBox() {
 	return (
 		<div className="search-box">
 			<div className="flex flex-col md:flex-row items-center gap-2">
-				<SearchInput
+				<Input
 					searchQuery={searchQuery}
 					handleInputChange={handleInputChange}
 					handleKeyPress={handleKeyPress}
 				/>
-				<SearchButton handleSearch={handleSearch} />
+				<Button handleSearch={handleSearch} />
 			</div>
 		</div>
 	);

@@ -1,8 +1,15 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 import { getMovieById } from "services/api";
 import { Movie } from "@/types/movies";
+
+interface MoviePageProps {
+	params: {
+		id: string;
+	};
+}
 
 async function getMovie(id: string) {
 	try {
@@ -14,11 +21,18 @@ async function getMovie(id: string) {
 	}
 }
 
-export default async function MoviePage({
+export async function generateMetadata({
 	params,
-}: {
-	params: { id: string };
-}) {
+}: MoviePageProps): Promise<Metadata> {
+	const movie = await getMovie(params.id);
+
+	return {
+		title: movie?.Title ? `${movie.Title} | ZareFlix` : "Movie Not Found",
+		description: movie?.Plot || "Movie details not available",
+	};
+}
+
+export default async function MoviePage({ params }: MoviePageProps) {
 	const movie = await getMovie(params.id);
 
 	if (!movie) {
@@ -35,6 +49,7 @@ export default async function MoviePage({
 							alt={movie.Title}
 							fill
 							className="rounded-lg object-cover w-full h-full"
+							priority
 						/>
 					</div>
 

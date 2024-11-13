@@ -1,14 +1,11 @@
 import MovieList from "@/components/MovieList/MovieList";
 import { SearchHero } from "@/components/SearchHero";
-import { MoviesProvider } from "@/context/MoviesContext";
 
-export default function App() {
+export default function Page() {
 	return (
-		<main className="font-sans">
-			<MoviesProvider>
-				<SearchHero />
-				<MovieList />
-			</MoviesProvider>
-		</main>
+		<>
+			<SearchHero />
+			<MovieList />
+		</>
 	);
 }

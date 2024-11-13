@@ -27,7 +27,7 @@ export default async function MoviePage({ params }: PageProps) {
 	}
 
 	return (
-		<main className="text-white min-h-screen p-8">
+		<div className="text-white min-h-screen p-8">
 			<div className="max-w-6xl mx-auto">
 				<div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
 					<div className="relative aspect-[2/3] w-full">
@@ -71,6 +71,6 @@ export default async function MoviePage({ params }: PageProps) {
 					</div>
 				</div>
 			</div>
-		</main>
+		</div>
 	);
 }

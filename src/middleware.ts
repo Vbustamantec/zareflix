@@ -5,5 +5,5 @@ export default withMiddlewareAuthRequired({
 });
 
 export const config = {
-	matcher: ["/favorites/:path*", "/api/favorites/:path*"],
+	matcher: ["/favorites/:path*"],
 };

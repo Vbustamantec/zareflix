@@ -18,7 +18,6 @@ interface PageProps {
 	params: Promise<{ id: string }>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function MoviePage({ params }: PageProps) {
 	const { id } = await params;
 	const movie = await getMovie(id);

@@ -10,12 +10,11 @@ export default function useSearch() {
 	const handleSearch = useCallback(async () => {
 		const trimmedQuery = searchQuery.trim();
 
-		if (trimmedQuery === "") {
+		if (!trimmedQuery) {
 			setError("Please enter a movie title to search.");
 			return;
 		}
 
-		// Evitar búsquedas duplicadas consecutivas
 		if (trimmedQuery === lastSearchRef.current) {
 			return;
 		}
@@ -24,8 +23,9 @@ export default function useSearch() {
 		setError(null);
 
 		try {
-			const data = await searchMovies(searchQuery);
+			const data = await searchMovies(trimmedQuery);
 			setMovies(data.Search);
+			lastSearchRef.current = trimmedQuery;
 		} catch (error) {
 			setError(
 				error instanceof Error ? error.message : "Failed to fetch movies"
@@ -36,21 +36,15 @@ export default function useSearch() {
 		}
 	}, [searchQuery, setMovies, setIsLoading, setError]);
 
-	const handleInputChange = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			setSearchQuery(e.target.value);
-		},
-		[]
-	);
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchQuery(e.target.value);
+	};
 
-	const handleKeyPress = useCallback(
-		(e: React.KeyboardEvent<HTMLInputElement>) => {
-			if (e.key === "Enter") {
-				handleSearch();
-			}
-		},
-		[handleSearch]
-	);
+	const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			handleSearch();
+		}
+	};
 
 	return {
 		searchQuery,

@@ -20,7 +20,7 @@ function MovieCard({ movie }: MovieCardProps) {
 				<p className="text-gray-400 text-sm text-center">{movie.Year}</p>
 				<Link
 					href={`/movie/${movie.imdbID}`}
-					className="bg-red-800 text-white p-3 rounded-md text-center"
+					className="btn-primary w-full text-center"
 				>
 					More Info
 				</Link>

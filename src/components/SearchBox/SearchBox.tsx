@@ -9,7 +9,7 @@ export function SearchBox() {
 		useSearch();
 
 	return (
-		<div className="search-box">
+		<div>
 			<div className="flex flex-col md:flex-row items-center gap-2">
 				<Input
 					searchQuery={searchQuery}

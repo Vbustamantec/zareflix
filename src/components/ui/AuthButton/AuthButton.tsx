@@ -25,31 +25,17 @@ function AuthButton() {
 	return user ? (
 		<div className="flex items-center gap-4">
 			<span className="text-white truncate max-w-[200px]">
-				{user?.nickname || user?.email}
+				Logged in as: {user?.nickname || user?.email}
 			</span>
 			<Link href="/favorites" className="text-white">
 				Favorites
 			</Link>
-			<Link
-				href="/api/auth/logout"
-				className="md:w-[150px] w-full bg-red-800 text-white px-5 py-3 rounded-md hover:bg-red-700 
-                   transition-all duration-300 ease-in-out 
-                   hover:shadow-[0_0_15px_rgba(220,38,38,0.5)] 
-                   active:transform active:scale-95
-                   text-center whitespace-nowrap"
-			>
+			<Link href="/api/auth/logout" className="btn-primary">
 				Logout
 			</Link>
 		</div>
 	) : (
-		<Link
-			href="/api/auth/login"
-			className="md:w-[150px] w-full bg-red-800 text-white px-5 py-3 rounded-md hover:bg-red-700 
-                 transition-all duration-300 ease-in-out 
-                 hover:shadow-[0_0_15px_rgba(220,38,38,0.5)] 
-                 active:transform active:scale-95
-                 text-center whitespace-nowrap"
-		>
+		<Link href="/api/auth/login" className="btn-primary">
 			Login
 		</Link>
 	);

@@ -3,10 +3,10 @@
 import React from "react";
 import Link from "next/link";
 
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { UserProfile, useUser } from "@auth0/nextjs-auth0/client";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function AuthButtonPlaceholder({ user }: any) {
+export function AuthButtonPlaceholder({ user }: UserProfile | any) {
 	return (
 		<div className="flex items-center gap-4">
 			{user && (

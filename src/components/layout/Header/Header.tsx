@@ -4,7 +4,7 @@ import AuthButton from "@/components/ui/AuthButton/AuthButton";
 
 export function Header() {
 	return (
-		<header className="bg-dark-gray p-4 font-sans">
+		<header className="bg-dark-gray p-4 border-b border-gray-800">
 			<div className="max-w-full mx-4 flex justify-between items-center">
 				<Link href="/" className="flex items-center gap-2">
 					<div className="relative w-32 h-8">

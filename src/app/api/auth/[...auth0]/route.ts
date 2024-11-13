@@ -6,6 +6,6 @@ export const GET = handleAuth({
 	}),
 	onError(req: Request, error: Error) {
 		console.error(error);
-		return new Response(`Auth error: ${error.message}`, { status: 500 });
+		return Response.redirect(new URL("/?error=login_error", req.url));
 	},
 });

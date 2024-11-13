@@ -5,7 +5,7 @@ import React from "react";
 import { useMovies } from "@/context/MoviesContext";
 
 import MovieCard from "@/components/MovieCard/MovieCard";
-import Loader from "@/components/Loader";
+import Loader from "@/components/ui/Loader";
 
 function MovieList() {
 	const { movies, isLoading, error } = useMovies();

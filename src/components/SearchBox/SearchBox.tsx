@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import useSearch from "@/hooks/useSearch";
-import SearchInput from "@/components/SearchBox/SearchInput";
-import SearchButton from "@/components/SearchBox/SearchButton";
+import SearchInput from "@/components/ui/Input/Input";
+import SearchButton from "@/components/ui/Button/Button";
 
 export function SearchBox() {
 	const { searchQuery, handleInputChange, handleKeyPress, handleSearch } =

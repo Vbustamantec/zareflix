@@ -8,6 +8,7 @@ import "./globals.css";
 import { MoviesProvider } from "@/context/MoviesContext";
 
 import Header from "@/components/layout/Header/Header";
+import Footer from "@/components/layout/Footer/Footer";
 
 const robotoFlex = Roboto_Flex({
 	subsets: ["latin"],
@@ -28,11 +29,14 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${robotoFlex.variable}  antialiased bg-black`}>
+			<body
+				className={`${robotoFlex.variable} font-sans min-h-screen flex flex-col antialiased bg-black`}
+			>
 				<MoviesProvider>
 					<UserProvider>
 						<Header />
-						<main className="font-sans">{children}</main>
+						<main className="flex-grow">{children}</main>
+						<Footer />
 					</UserProvider>
 				</MoviesProvider>
 			</body>

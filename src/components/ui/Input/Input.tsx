@@ -3,7 +3,7 @@ import React from "react";
 
 import { InputProps } from "./Input.types";
 
-export function Input({
+export default function Input({
 	searchQuery,
 	handleInputChange,
 	handleKeyPress,

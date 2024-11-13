@@ -7,7 +7,7 @@ import { useMovies } from "@/context/MoviesContext";
 import MovieCard from "@/components/MovieCard/MovieCard";
 import { SkeletonList } from "../ui/Skeleton";
 
-function MovieList() {
+export default function MovieList() {
 	const { movies, isLoading, error } = useMovies();
 
 	if (isLoading) {
@@ -38,5 +38,3 @@ function MovieList() {
 		</div>
 	);
 }
-
-export default MovieList;

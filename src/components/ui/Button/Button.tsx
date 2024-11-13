@@ -3,7 +3,7 @@ import React from "react";
 
 import { ButtonProps } from "./Button.types";
 
-export function Button({
+export default function Button({
 	handleSearch,
 	ariaLabel = "Seach Movies",
 	className,

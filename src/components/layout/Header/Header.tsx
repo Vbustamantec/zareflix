@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AuthButton from "@/components/ui/AuthButton/AuthButton";
 
-export function Header() {
+export default function Header() {
 	return (
 		<header className="bg-dark-gray p-4 border-b border-gray-800">
 			<div className="max-w-full mx-4 flex justify-between items-center">
@@ -25,5 +25,3 @@ export function Header() {
 		</header>
 	);
 }
-
-export { Header as default } from "./Header";

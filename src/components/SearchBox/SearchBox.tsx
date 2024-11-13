@@ -4,7 +4,7 @@ import useSearch from "@/hooks/useSearch";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 
-export function SearchBox() {
+export default function SearchBox() {
 	const { searchQuery, handleInputChange, handleKeyPress, handleSearch } =
 		useSearch();
 

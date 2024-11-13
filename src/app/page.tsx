@@ -1,5 +1,5 @@
 import MovieList from "@/components/MovieList/MovieList";
-import { SearchHero } from "@/components/SearchHero";
+import SearchHero from "@/components/SearchHero";
 
 export default function Page() {
 	return (

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { MovieCardProps } from "./MovieCard.types";
 
-function MovieCard({ movie }: MovieCardProps) {
+export default function MovieCard({ movie }: MovieCardProps) {
 	return (
 		<div className="movie-card p-4 bg-dark-gray rounded-md">
 			<div className="relative w-full h-96 mb-2 flex justify-center items-center">
@@ -29,4 +29,3 @@ function MovieCard({ movie }: MovieCardProps) {
 	);
 }
 
-export default MovieCard;

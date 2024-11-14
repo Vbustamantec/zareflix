@@ -2,12 +2,12 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { getMovieById } from "services/api";
-import { Movie } from "@/types/movies";
+import { MovieDetails } from "@/types/movies";
 
 async function getMovie(id: string) {
 	try {
 		const movie = await getMovieById(id);
-		return movie as Movie;
+		return movie as MovieDetails;
 	} catch (error) {
 		console.error(error);
 		return null;

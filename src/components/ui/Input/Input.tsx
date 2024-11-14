@@ -5,8 +5,8 @@ import { InputProps } from "./Input.types";
 
 export default function Input({
 	value,
-	handleInputChange,
-	handleKeyPress,
+	onChange,
+	onKeyDown,
 	type = `text`,
 	placeholder = `Search for a movie...`,
 	ariaLabel = `Search for a movie`,
@@ -17,8 +17,8 @@ export default function Input({
 		<input
 			type={type}
 			value={value}
-			onChange={handleInputChange}
-			onKeyDown={handleKeyPress}
+			onChange={onChange}
+			onKeyDown={onKeyDown}
 			className="p-3 rounded-md text-black w-full"
 			placeholder={placeholder}
 			aria-label={ariaLabel}

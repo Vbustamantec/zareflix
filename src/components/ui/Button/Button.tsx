@@ -4,19 +4,20 @@ import React from "react";
 import { ButtonProps } from "./Button.types";
 
 export default function Button({
-	handleSearch,
+	onClick,
 	ariaLabel = "Seach Movies",
 	className,
+	children,
 	...props
 }: ButtonProps) {
 	return (
 		<button
-			onClick={handleSearch}
+			onClick={onClick}
 			className={`btn-primary ${className}`}
 			aria-label={ariaLabel}
 			{...props}
 		>
-			Search
+			{children}
 		</button>
 	);
 }

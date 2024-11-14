@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import placeholderImage from "@/assets/placeholder.webp";
+
 import { MovieCardProps } from "./MovieCard.types";
 
 export default function MovieCard({ movie }: MovieCardProps) {
@@ -9,7 +11,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
 		<div className="movie-card p-4 bg-dark-gray rounded-md">
 			<div className="relative w-full h-96 mb-2 flex justify-center items-center">
 				<Image
-					src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
+					src={movie.Poster !== "N/A" ? movie.Poster : placeholderImage}
 					alt={movie.Title}
 					fill
 					className="object-cover object-center rounded-md"
@@ -28,4 +30,3 @@ export default function MovieCard({ movie }: MovieCardProps) {
 		</div>
 	);
 }
-

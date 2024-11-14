@@ -14,12 +14,12 @@ export default function SearchBox() {
 			<div className="flex flex-col md:flex-row items-center gap-2">
 				<Input
 					value={searchInput}
-					handleInputChange={handleInputChange}
-					handleKeyPress={handleKeyPress}
+					onChange={handleInputChange}
+					onKeyDown={handleKeyPress}
 					placeholder="Search for a movie..."
 					aria-label="Search for a movie"
 				/>
-				<Button handleSearch={handleSearch} />
+				<Button onClick={handleSearch}>Search</Button>
 			</div>
 		</div>
 	);

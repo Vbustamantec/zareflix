@@ -1,5 +1,8 @@
-// src/components/ui/Pagination/Pagination.tsx
 import React from "react";
+
+import { usePagination } from "@/hooks/usePagination";
+
+import Button from "@/components/ui/Button";
 
 import { PaginationProps } from "./Pagination.types";
 
@@ -8,72 +11,43 @@ export default function Pagination({
 	totalPages,
 	onPageChange,
 }: PaginationProps) {
-	const pages = Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
-		if (totalPages <= 5) return i + 1;
-		if (currentPage <= 3) return i + 1;
-		if (currentPage >= totalPages - 2) return totalPages - 4 + i;
-		return currentPage - 2 + i;
+	const { paginationItems } = usePagination({
+		currentPage,
+		totalPages,
 	});
 
 	return (
 		<div className="flex justify-center gap-2 mt-8">
-			<button
-				onClick={() => onPageChange(currentPage - 1)}
-				disabled={currentPage === 1}
-				className="btn-primary !w-auto px-4 disabled:opacity-50"
-			>
-				Previous
-			</button>
+			{paginationItems.map((item, index) => {
+				if (item.type === "ellipsis") {
+					return (
+						<span key={`ellipsis-${index}`} className="text-white self-center">
+							{item.label}
+						</span>
+					);
+				}
 
-			{pages[0] > 1 && (
-				<>
-					<button
-						onClick={() => onPageChange(1)}
-						className={`btn-primary !w-auto px-4 ${
-							currentPage === 1 ? "bg-red-700" : ""
-						}`}
+				return (
+					<Button
+						key={`button-${index}-${item.page}`}
+						onClick={() => item.page && onPageChange(item.page)}
+						disabled={item.isDisabled}
+						className={`
+              btn-primary 
+              !w-auto 
+              px-4 
+              ${item.isActive ? "bg-red-700" : ""} 
+              ${
+								item.isDisabled
+									? "disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-red-800 disabled:hover:transition-none disabled:hover:shadow-none"
+									: ""
+							}
+            `}
 					>
-						1
-					</button>
-					{pages[0] > 2 && <span className="text-white self-center">...</span>}
-				</>
-			)}
-
-			{pages.map((page) => (
-				<button
-					key={page}
-					onClick={() => onPageChange(page)}
-					className={`btn-primary !w-auto px-4 ${
-						currentPage === page ? "bg-red-700" : ""
-					}`}
-				>
-					{page}
-				</button>
-			))}
-
-			{pages[pages.length - 1] < totalPages && (
-				<>
-					{pages[pages.length - 1] < totalPages - 1 && (
-						<span className="text-white self-center">...</span>
-					)}
-					<button
-						onClick={() => onPageChange(totalPages)}
-						className={`btn-primary !w-auto px-4 ${
-							currentPage === totalPages ? "bg-red-700" : ""
-						}`}
-					>
-						{totalPages}
-					</button>
-				</>
-			)}
-
-			<button
-				onClick={() => onPageChange(currentPage + 1)}
-				disabled={currentPage === totalPages}
-				className="btn-primary !w-auto px-4 disabled:opacity-50"
-			>
-				Next
-			</button>
+						{item.label}
+					</Button>
+				);
+			})}
 		</div>
 	);
 }

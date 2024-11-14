@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import SearchBox from "@/components/SearchBox";
+import Loader from "@/components/ui/Loader";
 
 export default function SearchHero() {
 	return (
@@ -7,7 +8,9 @@ export default function SearchHero() {
 			<h1 className="text-3xl md:text-5xl text-white mb-6 text-center font-bold">
 				ZareFlix Movie Searcher
 			</h1>
-			<SearchBox />
+			<Suspense fallback={<Loader />}>
+				<SearchBox />
+			</Suspense>
 		</section>
 	);
 }

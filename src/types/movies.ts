@@ -1,4 +1,4 @@
-export interface Movie {
+export interface BasicMovie {
 	Title: string;
 	Year: string;
 	imdbID: string;
@@ -6,14 +6,7 @@ export interface Movie {
 	Poster: string;
 }
 
-export interface MovieSearchResponse {
-	Search: Movie[];
-	totalResults: string;
-	Response: string;
-	Error?: string;
-}
-
-export interface MovieDetails extends Movie {
+export interface MovieDetails extends BasicMovie {
 	Rated: string;
 	Released: string;
 	Runtime: string;
@@ -33,4 +26,11 @@ export interface MovieDetails extends Movie {
 	BoxOffice?: string;
 	Production?: string;
 	Website?: string;
+}
+
+export interface MovieSearchResponse {
+	Search: BasicMovie[];
+	totalResults: string;
+	Response: string;
+	Error?: string;
 }

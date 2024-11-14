@@ -1,5 +1,5 @@
-import { Movie } from "@/types/movies";
+import { BasicMovie } from "@/types/movies";
 
 export interface MovieCardProps {
-	movie: Movie;
+	movie: BasicMovie;
 }

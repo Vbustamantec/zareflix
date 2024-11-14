@@ -4,7 +4,7 @@ import React from "react";
 import { InputProps } from "./Input.types";
 
 export default function Input({
-	searchQuery,
+	value,
 	handleInputChange,
 	handleKeyPress,
 	type = `text`,
@@ -16,7 +16,7 @@ export default function Input({
 	return (
 		<input
 			type={type}
-			value={searchQuery}
+			value={value}
 			onChange={handleInputChange}
 			onKeyDown={handleKeyPress}
 			className="p-3 rounded-md text-black w-full"

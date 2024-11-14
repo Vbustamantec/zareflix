@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Roboto_Flex } from "next/font/google";
 
-import "./globals.css";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
-import { MoviesProvider } from "@/context/MoviesContext";
+import QueryClientContext from "@/context/QueryClientContext";
 
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
+import "./globals.css";
 
 const robotoFlex = Roboto_Flex({
 	subsets: ["latin"],
@@ -32,13 +31,13 @@ export default function RootLayout({
 			<body
 				className={`${robotoFlex.variable} font-sans min-h-screen flex flex-col antialiased bg-black`}
 			>
-				<MoviesProvider>
+				<QueryClientContext>
 					<UserProvider>
 						<Header />
 						<main className="flex-grow">{children}</main>
 						<Footer />
 					</UserProvider>
-				</MoviesProvider>
+				</QueryClientContext>
 			</body>
 		</html>
 	);

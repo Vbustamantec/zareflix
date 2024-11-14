@@ -1,28 +1,33 @@
 "use client";
-
 import React from "react";
-
-import { useMovies } from "@/context/MoviesContext";
-
 import MovieCard from "@/components/MovieCard/MovieCard";
 import { SkeletonList } from "../ui/Skeleton";
+import Pagination from "../ui/Pagination/Pagination";
+import { useMovieSearch } from "@/hooks/useMoviesSearch";
 
 export default function MovieList() {
-	const { movies, isLoading, error } = useMovies();
+	const {
+		movies,
+		isLoading,
+		error,
+		currentPage,
+		totalPages,
+		handlePageChange,
+	} = useMovieSearch();
 
 	if (isLoading) {
 		return <SkeletonList />;
 	}
 
-	if (error) {
+	if (error instanceof Error) {
 		return (
 			<p className="text-red-500 mt-2 lg:mt-12 text-center text-3xl font-bold">
-				{error}
+				{error.message}
 			</p>
 		);
 	}
 
-	if (movies.length === 0) {
+	if (!movies.length) {
 		return (
 			<p className="text-white lg:mt-12 text-center text-3xl font-bold">
 				There are no movies to show yet 😢
@@ -31,10 +36,20 @@ export default function MovieList() {
 	}
 
 	return (
-		<div className="mx-10 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 lg:grid-cols-4 gap-4 mt-4">
-			{movies.map((movie) => (
-				<MovieCard key={movie.imdbID} movie={movie} />
-			))}
-		</div>
+		<>
+			<div className="mx-10 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 lg:grid-cols-4 gap-4 mt-4">
+				{movies.map((movie) => (
+					<MovieCard key={movie.imdbID} movie={movie} />
+				))}
+			</div>
+
+			{totalPages > 1 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={handlePageChange}
+				/>
+			)}
+		</>
 	);
 }

@@ -1,11 +1,14 @@
 import MovieList from "@/components/MovieList/MovieList";
 import SearchHero from "@/components/SearchHero";
+import { Suspense } from "react";
 
 export default function Page() {
 	return (
 		<>
-			<SearchHero />
-			<MovieList />
+			<Suspense fallback={<div>Loading...</div>}>
+				<SearchHero />
+				<MovieList />
+			</Suspense>
 		</>
 	);
 }

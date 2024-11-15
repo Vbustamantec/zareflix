@@ -21,6 +21,9 @@ export default function AuthButton() {
 			<Link href="/favorites" className="text-white">
 				Favorites
 			</Link>
+			<Link href="/test-page" className="text-white">
+				Test
+			</Link>
 			<Link href="/api/auth/logout" className="btn-primary">
 				Logout
 			</Link>

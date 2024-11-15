@@ -27,7 +27,7 @@ export default function FavoritesPage() {
 			<div className="container mx-auto px-4 py-8">
 				<h1 className="text-3xl font-bold text-white mb-6">My Favorites</h1>
 				<p className="text-gray-400 text-center text-xl">
-					You haven't added any favorites yet.
+					You havent added any favorites yet.
 				</p>
 			</div>
 		);

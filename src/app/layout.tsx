@@ -7,6 +7,7 @@ import QueryClientContext from "@/context/QueryClientContext";
 
 import Header from "@/components/layout/Header/Header";
 import Footer from "@/components/layout/Footer/Footer";
+import AutoSync from "@/components/auth/AutoSync/AutoSync";
 import "./globals.css";
 
 const robotoFlex = Roboto_Flex({
@@ -33,6 +34,7 @@ export default function RootLayout({
 			>
 				<QueryClientContext>
 					<UserProvider>
+						<AutoSync />
 						<Header />
 						<main className="flex-grow">{children}</main>
 						<Footer />

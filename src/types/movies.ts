@@ -34,3 +34,13 @@ export interface MovieSearchResponse {
 	Response: string;
 	Error?: string;
 }
+
+export interface FavoriteMovie {
+	_id: string;
+	userId: string;
+	movieId: string;
+	title: string;
+	poster: string;
+	year: string;
+	personalNotes?: string;
+}

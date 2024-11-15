@@ -2,20 +2,30 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "@/components/ui/FavoriteButton";
+import { useFavorites } from "@/hooks/useFavorites";
 import placeholderImage from "@/assets/placeholder.webp";
 import { MovieCardProps } from "./MovieCard.types";
 
-export default function MovieCard({
-	movie,
-	isFavorite,
-	onToggleFavorite,
-}: MovieCardProps) {
+export default function MovieCard({ movie }: MovieCardProps) {
+	const { isFavorite, addFavorite, removeFavorite, getFavoriteById } =
+		useFavorites();
+	const favorite = getFavoriteById(movie.imdbID);
+	const isMovieFavorite = isFavorite(movie.imdbID);
+
+	const handleToggleFavorite = () => {
+		if (isMovieFavorite && favorite) {
+			removeFavorite(favorite._id);
+		} else {
+			addFavorite(movie);
+		}
+	};
+
 	return (
 		<div className="movie-card relative p-4 bg-dark-gray rounded-md group">
 			<div className="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 				<FavoriteButton
-					isFavorite={isFavorite}
-					onAdd={() => onToggleFavorite?.(movie)}
+					isFavorite={isMovieFavorite}
+					onAdd={handleToggleFavorite}
 				/>
 			</div>
 

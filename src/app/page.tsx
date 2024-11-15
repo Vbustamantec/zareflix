@@ -1,6 +1,6 @@
 import MovieList from "@/components/MovieList/MovieList";
-import TestServer from "@/components/SearchBox/test";
 import SearchHero from "@/components/SearchHero";
+import TestServer from "@/components/TestComponents/test";
 import { SkeletonList } from "@/components/ui/Skeleton";
 import { Suspense } from "react";
 

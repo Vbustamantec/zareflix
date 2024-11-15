@@ -33,6 +33,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
 				<Image
 					src={movie.Poster !== "N/A" ? movie.Poster : placeholderImage}
 					alt={movie.Title}
+					sizes="(max-width: 640px) 100vw, 640px"
 					fill
 					className="object-cover object-center rounded-md"
 				/>

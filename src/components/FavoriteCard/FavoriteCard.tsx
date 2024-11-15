@@ -40,7 +40,7 @@ export default function FavoriteCard({
 			<div className="relative aspect-[2/3]">
 				<Image
 					src={favorite.poster !== "N/A" ? favorite.poster : placeholderImage}
-					alt={favorite.title}
+					alt={favorite.title || "Movie Poster"}
 					fill
 					className="object-cover"
 				/>

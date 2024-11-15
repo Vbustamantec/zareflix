@@ -12,6 +12,7 @@ export default function Header() {
 							src="/logo.webp"
 							alt="ZareFlix Logo"
 							fill
+							sizes="(max-width: 640px) 100vw, 640px"
 							className="object-contain"
 							priority
 						/>

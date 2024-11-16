@@ -11,3 +11,25 @@
              text-center whitespace-nowrap;
 	}
 }
+
+.netflix-menu-enter {
+	opacity: 0;
+	transform: translateY(-10px);
+}
+
+.netflix-menu-enter-active {
+	opacity: 1;
+	transform: translateY(0);
+	transition: opacity 200ms, transform 200ms;
+}
+
+.netflix-menu-exit {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.netflix-menu-exit-active {
+	opacity: 0;
+	transform: translateY(-10px);
+	transition: opacity 200ms, transform 200ms;
+}

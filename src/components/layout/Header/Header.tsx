@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import AuthButton from "@/components/ui/AuthButton/AuthButton";
+import UserNavigation from "@/components/navigation";
 
 export default function Header() {
 	return (
@@ -20,7 +20,7 @@ export default function Header() {
 				</Link>
 
 				<nav className="flex items-center gap-4">
-					<AuthButton />
+					<UserNavigation />
 				</nav>
 			</div>
 		</header>

@@ -27,7 +27,7 @@ export function APITestPanel() {
 			const response = await fetch("/services/sync", {
 				method: "POST",
 				headers: {
-					Authorization: `Bearer ${user?.accessToken}`,
+					Authorization: `Bearer ${user?.sub}`,
 					"Content-Type": "application/json",
 				},
 			});

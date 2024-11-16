@@ -8,7 +8,7 @@ export default function NavLinks() {
 				href="/favorites"
 				className="text-white hover:text-red-500 transition-colors"
 			>
-				Profile
+				Favorites
 			</Link>
 			<Link
 				href="/test-page"

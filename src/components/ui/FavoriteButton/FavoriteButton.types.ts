@@ -1,5 +1,5 @@
 export interface FavoriteButtonProps {
-	onAdd?: () => void;
+	onAdd: () => Promise<void>;
 	isFavorite?: boolean;
 	className?: string;
-}
+  }

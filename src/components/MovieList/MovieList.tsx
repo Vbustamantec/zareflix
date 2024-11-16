@@ -16,7 +16,7 @@ export default function MovieList() {
 	} = useMovieSearch();
 
 	if (isLoading) {
-		return <SkeletonList />;
+		return <SkeletonList className="mx-5" />;
 	}
 
 	if (error instanceof Error) {

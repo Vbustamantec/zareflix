@@ -12,11 +12,11 @@ export default function MovieCard({ movie }: MovieCardProps) {
 	const favorite = getFavoriteById(movie.imdbID);
 	const isMovieFavorite = isFavorite(movie.imdbID);
 
-	const handleToggleFavorite = () => {
+	const handleToggleFavorite = async () => {
 		if (isMovieFavorite && favorite) {
-			removeFavorite(favorite._id);
+			await removeFavorite(favorite._id);
 		} else {
-			addFavorite(movie);
+			await addFavorite(movie);
 		}
 	};
 

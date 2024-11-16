@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { getMovieById } from "services/api";
 import { MovieDetails } from "@/types/movies";
+import MovieRecommendations from "@/components/MovieRecommendations/MovieRecommendations";
 
 async function getMovie(id: string) {
 	try {
@@ -70,6 +71,7 @@ export default async function MoviePage({ params }: PageProps) {
 						</div>
 					</div>
 				</div>
+				<MovieRecommendations movieId={id} />
 			</div>
 		</div>
 	);

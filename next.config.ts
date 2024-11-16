@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
 				source: "/services/:path*",
 				destination: "http://localhost:3001/api/:path*",
 			},
+			{
+				source: "/recommendations/:path*",
+				destination: "http://localhost:3001/recommendations/:path*",
+			},
 		];
 	},
 };

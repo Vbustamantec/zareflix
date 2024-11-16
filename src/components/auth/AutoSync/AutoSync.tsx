@@ -10,11 +10,17 @@ export default function AutoSync() {
 			if (!user) return;
 
 			try {
+				const userData = {
+					email: user.email,
+					nickname: user.nickname || user.name || user.email?.split("@")[0],
+				};
+
 				const response = await fetch("/services/user/sync", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 					},
+					body: JSON.stringify(userData),
 				});
 
 				if (!response.ok) {

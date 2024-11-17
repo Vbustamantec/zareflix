@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRecommendations } from "@/hooks/useRecommendations";
 
-import { searchMovies } from "@/services/api";
+import { searchMovies } from "@/proxy/api";
 import { SkeletonList } from "@/ui/Skeleton";
 import MovieRecommendationCard from "@/features/movies/MovieRecommendationCard";
 

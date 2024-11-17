@@ -27,21 +27,15 @@ export default function TestPage() {
 						</h2>
 						<div className="space-y-4 text-gray-300">
 							<div>
-								<h3 className="font-semibold text-white">
-									GET /services/private
-								</h3>
+								<h3 className="font-semibold text-white">GET /proxy/private</h3>
 								<p>Tests protected route access with JWT authentication</p>
 							</div>
 							<div>
-								<h3 className="font-semibold text-white">
-									POST /services/sync
-								</h3>
+								<h3 className="font-semibold text-white">POST /proxy/sync</h3>
 								<p>Synchronizes Auth0 user data with database</p>
 							</div>
 							<div>
-								<h3 className="font-semibold text-white">
-									GET /services/user/me
-								</h3>
+								<h3 className="font-semibold text-white">GET /proxy/user/me</h3>
 								<p>Retrieves current user data from database</p>
 							</div>
 						</div>

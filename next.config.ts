@@ -7,12 +7,8 @@ const nextConfig: NextConfig = {
 	async rewrites() {
 		return [
 			{
-				source: "/services/:path*",
-				destination: "https://zareflix-api.onrender.com/api/:path*",
-			},
-			{
 				source: "/proxy/:path*",
-				destination: "https://zareflix-api.onrender.com/api/:path*",
+				destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`,
 			},
 		];
 	},

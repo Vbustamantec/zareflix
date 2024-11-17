@@ -11,7 +11,7 @@ export function APITestPanel() {
 
 	const handlePrivateRoute = async () => {
 		try {
-			const response = await fetch("/services/private");
+			const response = await fetch("/proxy/private");
 			const data = await response.json();
 			setApiResponse(data);
 			setError("");
@@ -23,7 +23,7 @@ export function APITestPanel() {
 
 	const handleSyncUser = async () => {
 		try {
-			const response = await fetch("/services/sync", {
+			const response = await fetch("/proxy/sync", {
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${user?.sub}`,
@@ -42,7 +42,7 @@ export function APITestPanel() {
 
 	const checkUserSync = async () => {
 		try {
-			const response = await fetch("/services/user/me");
+			const response = await fetch("/proxy/user/me");
 			const data = await response.json();
 
 			if (data.success) {

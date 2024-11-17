@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BasicMovie, FavoriteMovie } from "@/types/movies";
 
 async function getFavorites(): Promise<FavoriteMovie[]> {
-	const response = await fetch(`/services/favorites`, {
+	const response = await fetch(`/proxy/favorites`, {
 		credentials: "include",
 	});
 	if (!response.ok) {
@@ -13,7 +13,7 @@ async function getFavorites(): Promise<FavoriteMovie[]> {
 }
 
 async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
-	const response = await fetch(`services/favorites`, {
+	const response = await fetch(`proxy/favorites`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -37,7 +37,7 @@ async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 }
 
 async function removeFavorite(id: string): Promise<void> {
-	const response = await fetch(`services/favorites/${id}`, {
+	const response = await fetch(`proxy/favorites/${id}`, {
 		method: "DELETE",
 		credentials: "include",
 	});
@@ -51,7 +51,7 @@ async function updateFavorite(
 	id: string,
 	notes: string
 ): Promise<FavoriteMovie> {
-	const response = await fetch(`services/favorites/${id}`, {
+	const response = await fetch(`proxy/favorites/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",

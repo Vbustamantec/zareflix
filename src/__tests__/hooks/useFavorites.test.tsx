@@ -91,7 +91,7 @@ describe("useFavorites", () => {
 		});
 
 		expect(global.fetch).toHaveBeenCalledWith(
-			"/services/favorites",
+			"/proxy/favorites",
 			expect.objectContaining({
 				method: "POST",
 				headers: {
@@ -134,7 +134,7 @@ describe("useFavorites", () => {
 		});
 
 		expect(global.fetch).toHaveBeenCalledWith(
-			"/services/favorites/1",
+			"/proxy/favorites/1",
 			expect.objectContaining({
 				method: "DELETE",
 			})
@@ -189,7 +189,7 @@ describe("useFavorites", () => {
 		});
 
 		expect(global.fetch).toHaveBeenCalledWith(
-			"/services/favorites/1",
+			"/proxy/favorites/1",
 			expect.objectContaining({
 				method: "PUT",
 				headers: {

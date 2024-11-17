@@ -16,7 +16,7 @@ export default function AutoSync() {
 					nickname: user.nickname || user.name || user.email?.split("@")[0],
 				};
 
-				const response = await fetch(`services/user/sync`, {
+				const response = await fetch(`proxy/user/sync`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",

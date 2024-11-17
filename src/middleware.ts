@@ -2,7 +2,7 @@ import { getSession } from "@auth0/nextjs-auth0/edge";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
-	if (req.nextUrl.pathname.startsWith("/services")) {
+	if (req.nextUrl.pathname.startsWith("/proxy")) {
 		const res = NextResponse.next();
 		const session = await getSession(req, res);
 
@@ -17,5 +17,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/services/:path*"],
+	matcher: ["/proxy/:path*"],
 };

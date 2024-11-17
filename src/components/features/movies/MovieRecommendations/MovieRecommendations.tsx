@@ -66,12 +66,13 @@ export default function MovieRecommendations({
 				Movies You Might Like
 			</h2>
 			{moviesDetails && moviesDetails.length > 0 ? (
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-md:gap-6">
 					{moviesDetails.map((movie) => {
 						if (!movie) return null;
 
 						return (
 							<MovieRecommendationCard
+								key={movie.imdbID}
 								imdbID={movie.imdbID}
 								Poster={movie.Poster}
 								Title={movie.Title}

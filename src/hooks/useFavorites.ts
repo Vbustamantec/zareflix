@@ -1,10 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BasicMovie, FavoriteMovie } from "@/types/movies";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 async function getFavorites(): Promise<FavoriteMovie[]> {
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`
-	);
+	const response = await fetch(`${API_BASE_URL}/api/favorites`, {
+		credentials: "include",
+	});
 	if (!response.ok) {
 		throw new Error("Failed to fetch favorites");
 	}
@@ -13,22 +15,20 @@ async function getFavorites(): Promise<FavoriteMovie[]> {
 }
 
 async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`,
-		{
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				userId: movie.userId,
-				movieId: movie.imdbID,
-				title: movie.Title,
-				poster: movie.Poster,
-				year: movie.Year,
-			}),
-		}
-	);
+	const response = await fetch(`${API_BASE_URL}/api/favorites`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		credentials: "include",
+		body: JSON.stringify({
+			userId: movie.userId,
+			movieId: movie.imdbID,
+			title: movie.Title,
+			poster: movie.Poster,
+			year: movie.Year,
+		}),
+	});
 
 	if (!response.ok) {
 		throw new Error("Failed to add favorite");
@@ -39,12 +39,10 @@ async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 }
 
 async function removeFavorite(id: string): Promise<void> {
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${id}`,
-		{
-			method: "DELETE",
-		}
-	);
+	const response = await fetch(`${API_BASE_URL}/api/favorites/${id}`, {
+		method: "DELETE",
+		credentials: "include",
+	});
 
 	if (!response.ok) {
 		throw new Error("Failed to remove favorite");
@@ -55,16 +53,14 @@ async function updateFavorite(
 	id: string,
 	notes: string
 ): Promise<FavoriteMovie> {
-	const response = await fetch(
-		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${id}`,
-		{
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ personalNotes: notes }),
-		}
-	);
+	const response = await fetch(`${API_BASE_URL}/api/favorites/${id}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		credentials: "include",
+		body: JSON.stringify({ personalNotes: notes }),
+	});
 
 	if (!response.ok) {
 		throw new Error("Failed to update favorite");

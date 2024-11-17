@@ -2,9 +2,20 @@ import "@testing-library/jest-dom";
 
 jest.mock("next/image", () => ({
 	__esModule: true,
-	default: (props) => {
-		// eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
-		return <img {...props} />;
+	default: function MockImage({ src, alt, fill, priority, sizes, className }) {
+		const fillValue = fill ? "true" : undefined;
+
+		return (
+			<img
+				src={src}
+				alt={alt}
+				data-testid="mock-image"
+				data-fill={fillValue}
+				data-priority={priority ? "true" : undefined}
+				data-sizes={sizes}
+				className={className}
+			/>
+		);
 	},
 }));
 

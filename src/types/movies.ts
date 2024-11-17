@@ -1,5 +1,5 @@
 export interface BasicMovie {
-	userId: string;
+	userId?: string;
 	Title: string;
 	Year: string;
 	imdbID: string;

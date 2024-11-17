@@ -15,6 +15,16 @@ export default function FavoriteButton({
 	const { user } = useUser();
 	const [isLoading, setIsLoading] = useState(false);
 
+	const handleClick = async () => {
+		setIsLoading(true);
+		try {
+			await onAdd();
+			await new Promise((resolve) => setTimeout(resolve, 500));
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	if (!user) {
 		return (
 			<div className="relative">
@@ -27,16 +37,6 @@ export default function FavoriteButton({
 			</div>
 		);
 	}
-
-	const handleClick = async () => {
-		setIsLoading(true);
-		try {
-			await onAdd();
-			await new Promise((resolve) => setTimeout(resolve, 500));
-		} finally {
-			setIsLoading(false);
-		}
-	};
 
 	return (
 		<button

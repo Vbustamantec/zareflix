@@ -7,8 +7,13 @@ import Input from "@/ui/Input";
 import Button from "@/ui/Button";
 
 export default function SearchBox() {
-	const { searchInput, handleInputChange, handleKeyPress, handleSearch } =
-		useMovieSearch();
+	const {
+		searchInput,
+		handleInputChange,
+		handleKeyPress,
+		handleSearch,
+		isLoading,
+	} = useMovieSearch();
 
 	return (
 		<div>
@@ -19,8 +24,11 @@ export default function SearchBox() {
 					onKeyDown={handleKeyPress}
 					placeholder="Search for a movie..."
 					aria-label="Search for a movie"
+					disabled={isLoading}
 				/>
-				<Button onClick={handleSearch}>Search</Button>
+				<Button onClick={handleSearch} disabled={isLoading} aria-label="Search">
+					{isLoading ? "Searching..." : "Search"}
+				</Button>
 			</div>
 		</div>
 	);

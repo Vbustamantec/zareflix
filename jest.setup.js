@@ -33,3 +33,27 @@ jest.mock("next/navigation", () => ({
 		return new URLSearchParams();
 	},
 }));
+
+global.fetch = jest.fn(() =>
+	Promise.resolve({
+		ok: true,
+		json: () => Promise.resolve({}),
+	})
+);
+
+const originalError = console.error;
+console.error = (...args) => {
+	if (
+		/Warning/.test(args[0]) ||
+		/Not implemented/.test(args[0]) ||
+		/invalid prop/.test(args[0]) ||
+		/Failed prop type/.test(args[0])
+	) {
+		return;
+	}
+	originalError.call(console, ...args);
+};
+
+beforeEach(() => {
+	jest.clearAllMocks();
+});

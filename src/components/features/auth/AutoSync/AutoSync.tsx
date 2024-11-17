@@ -17,7 +17,7 @@ export default function AutoSync() {
 				};
 
 				const response = await fetch(
-					"https://zareflix-api.onrender.com/api/user/sync",
+					`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/sync`,
 					{
 						method: "POST",
 						headers: {

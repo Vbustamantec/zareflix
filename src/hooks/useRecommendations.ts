@@ -12,7 +12,9 @@ interface MovieRecommendation {
 const getRecommendations = async (
 	movieId: string
 ): Promise<MovieRecommendation> => {
-	const response = await fetch(`/services/recommendations/${movieId}`);
+	const response = await fetch(
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/recommendations/${movieId}`
+	);
 	if (!response.ok) {
 		throw new Error("Failed to fetch recommendations");
 	}

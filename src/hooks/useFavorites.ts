@@ -3,7 +3,7 @@ import { BasicMovie, FavoriteMovie } from "@/types/movies";
 
 async function getFavorites(): Promise<FavoriteMovie[]> {
 	const response = await fetch(
-		"https://zareflix-api.onrender.com/api/favorites"
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`
 	);
 	if (!response.ok) {
 		throw new Error("Failed to fetch favorites");
@@ -14,7 +14,7 @@ async function getFavorites(): Promise<FavoriteMovie[]> {
 
 async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 	const response = await fetch(
-		"https://zareflix-api.onrender.com/api/favorites",
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`,
 		{
 			method: "POST",
 			headers: {
@@ -40,7 +40,7 @@ async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 
 async function removeFavorite(id: string): Promise<void> {
 	const response = await fetch(
-		`https://zareflix-api.onrender.com/api/favorites/${id}`,
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${id}`,
 		{
 			method: "DELETE",
 		}
@@ -56,7 +56,7 @@ async function updateFavorite(
 	notes: string
 ): Promise<FavoriteMovie> {
 	const response = await fetch(
-		`https://zareflix-api.onrender.com/api/favorites/${id}`,
+		`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${id}`,
 		{
 			method: "PUT",
 			headers: {

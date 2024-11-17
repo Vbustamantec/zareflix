@@ -29,12 +29,14 @@ export default function UserNavigation() {
 			>
 				Favorites
 			</Link>
-			<Link
-				href="/test-page"
-				className="text-white hover:text-red-500 transition-colors"
-			>
-				API Panel
-			</Link>
+			{process.env.API_PANEL_TEST && (
+				<Link
+					href="/test-page"
+					className="text-white hover:text-red-500 transition-colors"
+				>
+					API Panel
+				</Link>
+			)}
 			<UserMenu user={user} />
 		</div>
 	);

@@ -12,7 +12,7 @@ export default function SearchBox() {
 		handleInputChange,
 		handleKeyPress,
 		handleSearch,
-		isLoading,
+		isFetching,
 	} = useMovieSearch();
 
 	return (
@@ -24,10 +24,14 @@ export default function SearchBox() {
 					onKeyDown={handleKeyPress}
 					placeholder="Search for a movie..."
 					aria-label="Search for a movie"
-					disabled={isLoading}
+					disabled={isFetching}
 				/>
-				<Button onClick={handleSearch} disabled={isLoading} aria-label="Search">
-					{isLoading ? "Searching..." : "Search"}
+				<Button
+					onClick={handleSearch}
+					disabled={isFetching}
+					aria-label="Search"
+				>
+					{isFetching ? "Searching..." : "Search"}
 				</Button>
 			</div>
 		</div>

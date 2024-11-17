@@ -13,13 +13,18 @@ interface UserMenuProps {
 export default function UserMenu({ user }: UserMenuProps) {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const handleToggleMenu = () => {
+		setIsOpen((prev) => !prev);
+	};
+
 	return (
-		<div
-			className="relative"
-			onMouseEnter={() => setIsOpen(true)}
-			onMouseLeave={() => setIsOpen(false)}
-		>
-			<button className="flex items-center gap-2 group">
+		<div className="relative">
+			<button
+				className="flex items-center gap-2 group"
+				onClick={handleToggleMenu}
+				aria-expanded={isOpen}
+				aria-controls="user-menu"
+			>
 				<div className="relative w-8 h-8 rounded overflow-hidden">
 					{user.picture ? (
 						<Image
@@ -42,26 +47,25 @@ export default function UserMenu({ user }: UserMenuProps) {
 				/>
 			</button>
 
-			<div
-				className={`absolute right-0 top-full mt-2 w-48 bg-black border border-gray-700 rounded shadow-lg transition-all duration-200 ${
-					isOpen
-						? "opacity-100 translate-y-0 visible"
-						: "opacity-0 -translate-y-2 invisible"
-				}`}
-			>
-				<div className="py-2 px-4">
-					<p className="text-white text-sm truncate mb-2">
-						{user.nickname || user.email}
-					</p>
-					<hr className="border-gray-700 my-2" />
-					<Link
-						href="/api/auth/logout"
-						className="text-white hover:text-red-500 text-sm block transition-colors duration-200"
-					>
-						Sign out of ZareFlix
-					</Link>
+			{isOpen && (
+				<div
+					id="user-menu"
+					className="absolute right-0 top-full mt-4 w-48 bg-black border border-gray-700 rounded shadow-lg transition-all duration-200"
+				>
+					<div className="py-2 px-4">
+						<p className="text-white text-sm truncate mb-2">
+							{user.nickname || user.email}
+						</p>
+						<hr className="border-gray-700 my-2" />
+						<Link
+							href="/api/auth/logout"
+							className="text-white hover:text-red-500 text-sm block transition-colors duration-200"
+						>
+							Sign out of ZareFlix
+						</Link>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }

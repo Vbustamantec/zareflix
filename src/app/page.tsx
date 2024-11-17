@@ -8,7 +8,7 @@ export default function Page() {
 	return (
 		<>
 			<SearchHero />
-			<Suspense fallback={<SkeletonList className="mx-10" />}>
+			<Suspense fallback={<SkeletonList className="mx-10 mt-4" />}>
 				<MovieList />
 			</Suspense>
 		</>

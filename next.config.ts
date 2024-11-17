@@ -8,11 +8,11 @@ const nextConfig: NextConfig = {
 		return [
 			{
 				source: "/services/:path*",
-				destination: "http://localhost:3001/api/:path*",
+				destination: "https://zareflix-api.onrender.com/api/:path*",
 			},
 			{
 				source: "/recommendations/:path*",
-				destination: "http://localhost:3001/recommendations/:path*",
+				destination: "https://zareflix-api.onrender.com/recommendations/:path*",
 			},
 		];
 	},

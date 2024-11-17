@@ -2,7 +2,9 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BasicMovie, FavoriteMovie } from "@/types/movies";
 
 async function getFavorites(): Promise<FavoriteMovie[]> {
-	const response = await fetch("/services/favorites");
+	const response = await fetch(
+		"https://zareflix-api.onrender.com/api/favorites"
+	);
 	if (!response.ok) {
 		throw new Error("Failed to fetch favorites");
 	}
@@ -11,19 +13,22 @@ async function getFavorites(): Promise<FavoriteMovie[]> {
 }
 
 async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
-	const response = await fetch("/services/favorites", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			userId: movie.userId,
-			movieId: movie.imdbID,
-			title: movie.Title,
-			poster: movie.Poster,
-			year: movie.Year,
-		}),
-	});
+	const response = await fetch(
+		"https://zareflix-api.onrender.com/api/favorites",
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				userId: movie.userId,
+				movieId: movie.imdbID,
+				title: movie.Title,
+				poster: movie.Poster,
+				year: movie.Year,
+			}),
+		}
+	);
 
 	if (!response.ok) {
 		throw new Error("Failed to add favorite");
@@ -34,9 +39,12 @@ async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 }
 
 async function removeFavorite(id: string): Promise<void> {
-	const response = await fetch(`/services/favorites/${id}`, {
-		method: "DELETE",
-	});
+	const response = await fetch(
+		`https://zareflix-api.onrender.com/api/favorites/${id}`,
+		{
+			method: "DELETE",
+		}
+	);
 
 	if (!response.ok) {
 		throw new Error("Failed to remove favorite");
@@ -47,13 +55,16 @@ async function updateFavorite(
 	id: string,
 	notes: string
 ): Promise<FavoriteMovie> {
-	const response = await fetch(`/services/favorites/${id}`, {
-		method: "PUT",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ personalNotes: notes }),
-	});
+	const response = await fetch(
+		`https://zareflix-api.onrender.com/api/favorites/${id}`,
+		{
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ personalNotes: notes }),
+		}
+	);
 
 	if (!response.ok) {
 		throw new Error("Failed to update favorite");

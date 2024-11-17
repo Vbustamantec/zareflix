@@ -17,5 +17,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/services/:path*", "/proxy/:path*"],
+	matcher: ["/services/:path*"],
 };

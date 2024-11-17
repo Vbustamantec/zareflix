@@ -1,8 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BasicMovie, FavoriteMovie } from "@/types/movies";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-
 async function getFavorites(): Promise<FavoriteMovie[]> {
 	const response = await fetch(`/services/favorites`, {
 		credentials: "include",

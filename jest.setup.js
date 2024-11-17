@@ -19,7 +19,6 @@ jest.mock("next/image", () => ({
 	},
 }));
 
-// Mock next/router
 jest.mock("next/navigation", () => ({
 	useRouter() {
 		return {
@@ -29,9 +28,10 @@ jest.mock("next/navigation", () => ({
 			back: jest.fn(),
 		};
 	},
-	useSearchParams() {
-		return new URLSearchParams();
-	},
+	useSearchParams: () => ({
+		get: jest.fn(),
+		toString: () => '',
+	  }),
 }));
 
 global.fetch = jest.fn(() =>

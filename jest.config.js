@@ -15,6 +15,9 @@ const customJestConfig = {
 		"^@/services/(.*)$": "<rootDir>/src/services/$1",
 		"^@/types/(.*)$": "<rootDir>/src/types/$1",
 	},
+	testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
+	modulePaths: ["<rootDir>/src"],
+	moduleDirectories: ["node_modules", "<rootDir>"],
 	collectCoverageFrom: [
 		"src/**/*.{js,jsx,ts,tsx}",
 		"!src/**/*.d.ts",

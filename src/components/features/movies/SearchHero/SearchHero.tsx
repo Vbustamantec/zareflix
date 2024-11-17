@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
-import SearchBox from "@/components/SearchBox";
-import Loader from "@/components/ui/Loader";
+
+import SearchBox from "@/features/movies/SearchBox";
+import Loader from "@/ui/Loader";
 
 export default function SearchHero() {
 	return (

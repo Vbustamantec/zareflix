@@ -3,11 +3,12 @@ import { Roboto_Flex } from "next/font/google";
 
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 
-import QueryClientContext from "@/context/QueryClientContext";
+import QueryClientContext from "context/QueryClientContext";
 
-import Header from "@/components/layout/Header/Header";
-import Footer from "@/components/layout/Footer/Footer";
-import AutoSync from "@/components/auth/AutoSync/AutoSync";
+import Header from "@/layout/Header/Header";
+import Footer from "@/layout/Footer/Footer";
+import AutoSync from "@/features/auth/AutoSync/AutoSync";
+
 import "./globals.css";
 
 const robotoFlex = Roboto_Flex({

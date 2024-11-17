@@ -1,7 +1,10 @@
 "use client";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { Heart, Loader2 } from "lucide-react";
 import { useState } from "react";
+
+import { useUser } from "@auth0/nextjs-auth0/client";
+
+import { Heart, Loader2 } from "lucide-react";
+
 import { FavoriteButtonProps } from "./FavoriteButton.types";
 
 export default function FavoriteButton({

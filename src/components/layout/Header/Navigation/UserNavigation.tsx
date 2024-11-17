@@ -4,8 +4,7 @@ import React from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Skeleton from "@/components/ui/Skeleton/Skeleton";
 import UserMenu from "./UserMenu";
-import LoginButton from "./LoginButton";
-import NavLinks from "./NavLinks";
+import Link from "next/link";
 
 export default function UserNavigation() {
 	const { user, isLoading } = useUser();
@@ -15,12 +14,27 @@ export default function UserNavigation() {
 	}
 
 	if (!user) {
-		return <LoginButton />;
+		return (
+			<Link href="/api/auth/login" className="btn-primary">
+				Login
+			</Link>
+		);
 	}
 
 	return (
 		<div className="flex gap-5 justify-center items-center">
-			<NavLinks />
+			<Link
+				href="/favorites"
+				className="text-white hover:text-red-500 transition-colors"
+			>
+				Favorites
+			</Link>
+			<Link
+				href="/test-page"
+				className="text-white hover:text-red-500 transition-colors"
+			>
+				API Panel
+			</Link>
 			<UserMenu user={user} />
 		</div>
 	);

@@ -1,6 +1,7 @@
 "use client";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import React, { useState } from "react";
+
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export function APITestPanel() {
 	const { user, isLoading } = useUser();
@@ -8,7 +9,6 @@ export function APITestPanel() {
 	const [dbUser, setDbUser] = useState(null);
 	const [error, setError] = useState<string>("");
 
-	// Test Private Routes
 	const handlePrivateRoute = async () => {
 		try {
 			const response = await fetch("/services/private");
@@ -21,7 +21,6 @@ export function APITestPanel() {
 		}
 	};
 
-	// User Sync Test
 	const handleSyncUser = async () => {
 		try {
 			const response = await fetch("/services/sync", {
@@ -41,7 +40,6 @@ export function APITestPanel() {
 		}
 	};
 
-	// Check Database User
 	const checkUserSync = async () => {
 		try {
 			const response = await fetch("/services/user/me");
@@ -65,7 +63,6 @@ export function APITestPanel() {
 		<div className="p-6 bg-dark-gray rounded-lg space-y-8">
 			<h1 className="text-2xl text-white font-bold">API Testing Panel</h1>
 
-			{/* Auth0 User Section */}
 			<section className="space-y-4">
 				<h2 className="text-xl text-white">Auth0 User Data</h2>
 				<pre className="bg-black p-4 rounded text-green-400 overflow-auto">
@@ -73,7 +70,6 @@ export function APITestPanel() {
 				</pre>
 			</section>
 
-			{/* Test Buttons Section */}
 			<section className="space-y-4">
 				<h2 className="text-xl text-white">API Tests</h2>
 				<div className="flex flex-wrap gap-4">
@@ -102,14 +98,12 @@ export function APITestPanel() {
 				</div>
 			</section>
 
-			{/* Error Display */}
 			{error && (
 				<div className="text-red-500 bg-red-100 p-4 rounded">
 					Error: {error}
 				</div>
 			)}
 
-			{/* API Response Display */}
 			{apiResponse && (
 				<section className="space-y-4">
 					<h2 className="text-xl text-white">API Response</h2>
@@ -119,7 +113,6 @@ export function APITestPanel() {
 				</section>
 			)}
 
-			{/* DB User Display */}
 			{dbUser && (
 				<section className="space-y-4">
 					<h2 className="text-xl text-white">Database User</h2>

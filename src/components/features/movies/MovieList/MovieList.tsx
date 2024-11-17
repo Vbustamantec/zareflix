@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import MovieCard from "@/components/MovieCard/MovieCard";
-import { SkeletonList } from "../ui/Skeleton";
-import Pagination from "../ui/Pagination/Pagination";
+
 import { useMovieSearch } from "@/hooks/useMoviesSearch";
+
+import MovieCard from "@/features/movies/MovieCard";
+import { SkeletonList } from "@/ui/Skeleton";
+import Pagination from "@/ui/Pagination";
 
 export default function MovieList() {
 	const {

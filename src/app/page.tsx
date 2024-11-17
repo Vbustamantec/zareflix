@@ -1,7 +1,8 @@
-import MovieList from "@/components/MovieList/MovieList";
-import SearchHero from "@/components/SearchHero";
-import { SkeletonList } from "@/components/ui/Skeleton";
 import { Suspense } from "react";
+
+import MovieList from "@/features/movies/MovieList";
+import SearchHero from "@/features/movies/SearchHero";
+import { SkeletonList } from "@/ui/Skeleton";
 
 export default function Page() {
 	return (

@@ -1,8 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BasicMovie, FavoriteMovie } from "@/types/movies";
 
-
-
 async function getFavorites(): Promise<FavoriteMovie[]> {
 	const response = await fetch("/services/favorites");
 	if (!response.ok) {
@@ -19,6 +17,7 @@ async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
+			userId: movie.userId,
 			movieId: movie.imdbID,
 			title: movie.Title,
 			poster: movie.Poster,

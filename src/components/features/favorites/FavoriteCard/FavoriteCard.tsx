@@ -1,24 +1,14 @@
 "use client";
 import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+
 import { Pencil, Trash2, X, Check } from "lucide-react";
+
 import placeholderImage from "@/assets/placeholder.webp";
 
-interface FavoriteCardProps {
-	favorite: {
-		_id: string;
-		movieId: string;
-		title: string;
-		poster: string;
-		year: string;
-		personalNotes?: string;
-	};
-	onRemove: () => void;
-	onUpdateNotes: (notes: string) => void;
-	isRemoving: boolean;
-	isUpdating: boolean;
-}
+import { FavoriteCardProps } from "./FavoriteCard.types";
 
 export default function FavoriteCard({
 	favorite,

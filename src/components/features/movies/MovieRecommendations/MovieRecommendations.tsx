@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useMemo } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRecommendations } from "@/hooks/useRecommendations";
+
 import { useQuery } from "@tanstack/react-query";
+import { useRecommendations } from "@/hooks/useRecommendations";
+
 import { searchMovies } from "@/services/api";
-import { SkeletonList } from "@/components/ui/Skeleton";
-import placeholderImage from "@/assets/placeholder.webp";
+import { SkeletonList } from "@/ui/Skeleton";
+import MovieRecommendationCard from "@/features/movies/MovieRecommendationCard";
 
 interface MovieRecommendationsProps {
 	movieId: string;
@@ -37,7 +37,6 @@ export default function MovieRecommendations({
 		);
 	}, [recommendationsData?.recommendations]);
 
-	// Buscar detalles de las películas en OMDB
 	const { data: moviesDetails, isLoading: isLoadingDetails } = useQuery({
 		queryKey: ["recommendedMoviesDetails", titles],
 		queryFn: async () => {
@@ -72,27 +71,12 @@ export default function MovieRecommendations({
 						if (!movie) return null;
 
 						return (
-							<Link
-								href={`/movie/${movie.imdbID}`}
-								key={movie.imdbID}
-								className="bg-dark-gray p-4 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
-							>
-								<div className="relative aspect-[2/3] mb-3">
-									<Image
-										src={
-											movie.Poster !== "N/A" ? movie.Poster : placeholderImage
-										}
-										alt={movie.Title}
-										fill
-										className="object-cover rounded-md"
-										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-									/>
-								</div>
-								<h3 className="text-white font-medium text-lg line-clamp-2">
-									{movie.Title}
-								</h3>
-								<p className="text-gray-400 text-sm mt-1">{movie.Year}</p>
-							</Link>
+							<MovieRecommendationCard
+								imdbID={movie.imdbID}
+								Poster={movie.Poster}
+								Title={movie.Title}
+								Year={movie.Year}
+							/>
 						);
 					})}
 				</div>

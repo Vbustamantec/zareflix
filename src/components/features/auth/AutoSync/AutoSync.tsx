@@ -1,6 +1,7 @@
 "use client";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
+
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function AutoSync() {
 	const { user, isLoading } = useUser();

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { getMovieById } from "services/api";
+import { getMovieById } from "@/services/api";
 import { MovieDetails } from "@/types/movies";
-import MovieRecommendations from "@/components/MovieRecommendations/MovieRecommendations";
+import MovieRecommendations from "@/features/movies/MovieRecommendations";
 
 async function getMovie(id: string) {
 	try {

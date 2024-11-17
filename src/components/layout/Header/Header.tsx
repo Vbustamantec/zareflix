@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import UserNavigation from "@/components/navigation";
+import UserNavigation from "@/components/layout/Header/Navigation";
 
 export default function Header() {
 	return (

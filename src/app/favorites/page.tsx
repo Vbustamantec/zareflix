@@ -1,7 +1,7 @@
 "use client";
 import { useFavorites } from "@/hooks/useFavorites";
 import { SkeletonList } from "@/components/ui/Skeleton";
-import FavoriteCard from "@/components/FavoriteCard/FavoriteCard";
+import FavoriteCard from "@/components/features/favorites/FavoriteCard/FavoriteCard";
 
 export default function FavoritesPage() {
 	const {

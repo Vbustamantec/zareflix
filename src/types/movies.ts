@@ -1,4 +1,5 @@
 export interface BasicMovie {
+	userId: string;
 	Title: string;
 	Year: string;
 	imdbID: string;
@@ -43,4 +44,11 @@ export interface FavoriteMovie {
 	poster: string;
 	year: string;
 	personalNotes?: string;
+}
+
+export interface MovieRecommendation {
+	Title: string;
+	Year: string;
+	imdbID: string;
+	Poster: string;
 }

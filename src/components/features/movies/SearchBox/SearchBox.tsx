@@ -1,9 +1,10 @@
-// src/components/SearchBox/SearchBox.tsx
 "use client";
 import React from "react";
+
 import { useMovieSearch } from "@/hooks/useMoviesSearch";
-import Input from "@/components/ui/Input";
-import Button from "@/components/ui/Button";
+
+import Input from "@/ui/Input";
+import Button from "@/ui/Button";
 
 export default function SearchBox() {
 	const { searchInput, handleInputChange, handleKeyPress, handleSearch } =

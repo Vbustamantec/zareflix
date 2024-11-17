@@ -1,5 +1,4 @@
-// pages/test/page.tsx
-import { APITestPanel } from "@/components/APITestPanel/APITestPanel";
+import { APITestPanel } from "@/features/auth/APITestPanel/APITestPanel";
 
 export default function TestPage() {
 	return (

@@ -4,7 +4,7 @@ import { BasicMovie, FavoriteMovie } from "@/types/movies";
 const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 async function getFavorites(): Promise<FavoriteMovie[]> {
-	const response = await fetch(`${API_BASE_URL}/api/favorites`, {
+	const response = await fetch(`/services/favorites`, {
 		credentials: "include",
 	});
 	if (!response.ok) {
@@ -15,7 +15,7 @@ async function getFavorites(): Promise<FavoriteMovie[]> {
 }
 
 async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
-	const response = await fetch(`${API_BASE_URL}/api/favorites`, {
+	const response = await fetch(`services/favorites`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -39,7 +39,7 @@ async function addFavorite(movie: BasicMovie): Promise<FavoriteMovie> {
 }
 
 async function removeFavorite(id: string): Promise<void> {
-	const response = await fetch(`${API_BASE_URL}/api/favorites/${id}`, {
+	const response = await fetch(`services/favorites/${id}`, {
 		method: "DELETE",
 		credentials: "include",
 	});
@@ -53,7 +53,7 @@ async function updateFavorite(
 	id: string,
 	notes: string
 ): Promise<FavoriteMovie> {
-	const response = await fetch(`${API_BASE_URL}/api/favorites/${id}`, {
+	const response = await fetch(`services/favorites/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",

@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
 				source: "/services/:path*",
 				destination: "https://zareflix-api.onrender.com/api/:path*",
 			},
+			{
+				source: "/proxy/:path*",
+				destination: "https://zareflix-api.onrender.com/api/:path*",
+			},
 		];
 	},
 };

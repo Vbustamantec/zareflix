@@ -4,7 +4,7 @@ import { NextResponse, NextRequest } from "next/server";
 export async function middleware(req: NextRequest) {
 	const isApiCall =
 		req.nextUrl.pathname.startsWith("/services") ||
-		req.nextUrl.href.includes("zareflix-api.onrender.com");
+		req.nextUrl.href.includes("/proxy");
 
 	if (isApiCall) {
 		const res = NextResponse.next();
@@ -21,5 +21,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/services/:path*"],
+	matcher: ["/services/:path*", "/proxy/:path*"],
 };

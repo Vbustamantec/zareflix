@@ -81,7 +81,6 @@ export default function MovieDetailsPresentation({
 					</div>
 				</div>
 
-				{/* Awards */}
 				{movie.Awards !== "N/A" && (
 					<div className="bg-red-900/20 p-4 rounded-lg border border-red-900/30">
 						<h3 className="text-red-500 font-semibold mb-2">Awards</h3>

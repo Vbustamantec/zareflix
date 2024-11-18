@@ -1,5 +1,4 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
-
 import { ExpandableNotesProps } from "./EditableContent.types";
 
 const MAX_LENGTH = 100;
@@ -14,12 +13,12 @@ export function ExpandableNotes({
 	}
 
 	if (notes.length <= MAX_LENGTH) {
-		return <span className="text-gray-400">{notes}</span>;
+		return <span className="text-gray-400 break-words">{notes}</span>;
 	}
 
 	return (
 		<div className="space-y-2">
-			<span className="text-gray-400">
+			<span className="text-gray-400 block break-words">
 				{isExpanded ? notes : `${notes.slice(0, MAX_LENGTH)}...`}
 			</span>
 			<div>

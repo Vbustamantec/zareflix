@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 
@@ -24,9 +23,9 @@ export default function Footer() {
 						</div>
 					</div>
 
-					<div className="space-y-4 ">
+					<div className="space-y-4 max-lg:items-center flex flex-col">
 						<h2 className="text-white text-lg font-bold">Technologies</h2>
-						<ul className="space-y-2 text-sm">
+						<ul className="space-y-2 text-sm max-lg:text-center">
 							<li className="text-gray-400">Next.js</li>
 							<li className="text-gray-400">React</li>
 							<li className="text-gray-400">Tailwind CSS</li>

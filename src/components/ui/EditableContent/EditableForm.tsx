@@ -9,6 +9,15 @@ export function EditableForm({
 	onCancel,
 	isUpdating,
 }: EditableFormProps) {
+	const MAX_CHARS = 150;
+
+	const handleNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const value = e.target.value;
+		if (value.length <= MAX_CHARS) {
+			setEditData({ ...editData, notes: value });
+		}
+	};
+
 	return (
 		<div className="space-y-4">
 			<div>
@@ -24,16 +33,15 @@ export function EditableForm({
 				<label className="text-white text-sm mb-1 block">Personal Notes</label>
 				<textarea
 					value={editData.notes}
-					onChange={(e) => setEditData({ ...editData, notes: e.target.value })}
-					className="w-full p-2 bg-gray-800 text-white rounded-md min-h-[100px]"
+					onChange={handleNotesChange}
+					className="w-full p-2 bg-gray-800 text-white rounded-md"
 					placeholder="Add personal notes..."
 					rows={3}
+					maxLength={MAX_CHARS}
 				/>
-				{editData.notes.length > 0 && (
-					<p className="text-gray-400 text-sm mt-1">
-						{editData.notes.length} characters
-					</p>
-				)}
+				<p className="text-gray-400 text-sm mt-1">
+					{editData.notes.length}/{MAX_CHARS} characters
+				</p>
 			</div>
 			<div className="flex justify-end gap-2">
 				<button

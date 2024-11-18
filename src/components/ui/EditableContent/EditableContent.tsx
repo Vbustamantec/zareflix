@@ -6,7 +6,7 @@ import { ActionButtons } from "./ActionButtons";
 
 import { EditableContentProps } from "./EditableContent.types";
 
-export default function EditableFavoriteSection({
+export default function EditableContent({
 	initialTitle,
 	initialNotes,
 	year,

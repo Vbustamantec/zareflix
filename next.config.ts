@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
 				source: "/proxy/:path*",
 				destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`,
 			},
+			{
+				source: "/movie/proxy/:path*",
+				destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`,
+			},
 		];
 	},
 };

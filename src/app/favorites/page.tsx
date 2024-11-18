@@ -1,8 +1,11 @@
 "use client";
 
+import { useSentimentAnalysis } from "@/hooks/useSentimentAnalysis";
+
 import { useFavorites } from "@/hooks/useFavorites";
 import { SkeletonList } from "@/components/ui/Skeleton";
 import FavoriteCard from "@/components/features/favorites/FavoriteCard/FavoriteCard";
+import SentimentAnalysis from "@/components/features/sentiment/SentimentAnalysis/SentimentAnalysis";
 
 export default function FavoritesPage() {
 	const {
@@ -13,6 +16,9 @@ export default function FavoritesPage() {
 		isRemoving,
 		isUpdating,
 	} = useFavorites();
+
+	const { data: sentimentData, isLoading: isLoadingSentiment } =
+		useSentimentAnalysis(favorites);
 
 	if (isLoading) {
 		return (
@@ -55,6 +61,13 @@ export default function FavoritesPage() {
 					/>
 				))}
 			</div>
+			{sentimentData && !isLoadingSentiment && (
+				<SentimentAnalysis
+					sentiment={sentimentData.sentiment}
+					score={sentimentData.score}
+					className="mt-8"
+				/>
+			)}
 		</div>
 	);
 }

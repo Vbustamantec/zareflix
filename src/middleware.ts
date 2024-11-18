@@ -2,7 +2,10 @@ import { getSession } from "@auth0/nextjs-auth0/edge";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
-	if (req.nextUrl.pathname.startsWith("/proxy")) {
+	if (
+		req.nextUrl.pathname.startsWith("/proxy") ||
+		req.nextUrl.pathname.startsWith("/movie/proxy")
+	) {
 		const res = NextResponse.next();
 		const session = await getSession(req, res);
 

@@ -47,17 +47,24 @@ async function removeFavorite(id: string): Promise<void> {
 	}
 }
 
-async function updateFavorite(
-	id: string,
-	notes: string
-): Promise<FavoriteMovie> {
-	const response = await fetch(`proxy/favorites/${id}`, {
+async function updateFavorite({
+	id,
+	notes,
+	title,
+}: {
+	id: string;
+	notes?: string;
+	title?: string;
+}): Promise<FavoriteMovie> {
+	const response = await fetch(`/proxy/favorites/${id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		credentials: "include",
-		body: JSON.stringify({ personalNotes: notes }),
+		body: JSON.stringify({
+			personalNotes: notes,
+			title: title,
+		}),
 	});
 
 	if (!response.ok) {
@@ -91,8 +98,15 @@ export function useFavorites() {
 	});
 
 	const updateMutation = useMutation({
-		mutationFn: ({ id, notes }: { id: string; notes: string }) =>
-			updateFavorite(id, notes),
+		mutationFn: ({
+			id,
+			notes,
+			title,
+		}: {
+			id: string;
+			notes?: string;
+			title?: string;
+		}) => updateFavorite({ id, notes, title }),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["favorites"] });
 		},

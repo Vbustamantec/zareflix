@@ -42,8 +42,12 @@ export default function FavoritesPage() {
 						key={favorite._id}
 						favorite={favorite}
 						onRemove={() => removeFavorite(favorite._id)}
-						onUpdateNotes={(notes) =>
-							updateFavorite({ id: favorite._id, notes })
+						onUpdate={(data) =>
+							updateFavorite({
+								id: favorite._id,
+								title: data.title,
+								notes: data.personalNotes,
+							})
 						}
 						isRemoving={isRemoving}
 						isUpdating={isUpdating}

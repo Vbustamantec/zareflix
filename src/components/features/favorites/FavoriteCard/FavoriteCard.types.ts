@@ -8,7 +8,7 @@ export interface FavoriteCardProps {
 		personalNotes?: string;
 	};
 	onRemove: () => void;
-	onUpdateNotes: (notes: string) => void;
+	onUpdate: (data: { title: string; personalNotes: string }) => void;
 	isRemoving: boolean;
 	isUpdating: boolean;
 }

@@ -1,20 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import MovieRecommendations from "@/features/movies/MovieRecommendations";
-import { MovieDetailsProps } from "./MovieDetails.types";
-import MovieDetailsPresentation from "./MovieDetailsPresentation";
-import { useFavorites } from "@/hooks/useFavorites";
 import { useUser } from "@auth0/nextjs-auth0/client";
+
+import { useFavorites } from "@/hooks/useFavorites";
+
+import MovieRecommendationsContainer from "@/features/movies/MovieRecommendations";
+import MovieDetailsPresentation from "./MovieDetailsPresentation";
+
+import { MovieDetailsProps } from "./MovieDetails.types";
 
 export default function MovieDetailsContainer({ movie }: MovieDetailsProps) {
 	const { user } = useUser();
-	const {
-		isFavorite,
-		addFavorite,
-		removeFavorite,
-		getFavoriteById,
-	} = useFavorites();
+	const { isFavorite, addFavorite, removeFavorite, getFavoriteById } =
+		useFavorites();
 
 	const favorite = getFavoriteById(movie.imdbID);
 	const isMovieFavorite = isFavorite(movie.imdbID);
@@ -68,7 +67,7 @@ export default function MovieDetailsContainer({ movie }: MovieDetailsProps) {
 					/>
 
 					<div className="mt-16">
-						<MovieRecommendations movieId={movie.imdbID} />
+						<MovieRecommendationsContainer movieId={movie.imdbID} />
 					</div>
 				</div>
 			</div>

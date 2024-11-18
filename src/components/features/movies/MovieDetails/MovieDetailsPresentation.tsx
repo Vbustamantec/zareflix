@@ -3,10 +3,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Clock, Calendar, Award } from "lucide-react";
 
+import FavoriteButton from "@/components/ui/FavoriteButton";
 import { MovieMetadata } from "./MovieMetadata";
 import RatingBadge from "./RatingBadge";
+
 import { MovieDetailsPresentationProps } from "./MovieDetails.types";
-import FavoriteButton from "@/components/ui/FavoriteButton";
 
 export default function MovieDetailsPresentation({
 	movie,

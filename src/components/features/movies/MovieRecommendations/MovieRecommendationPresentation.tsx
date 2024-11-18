@@ -6,7 +6,7 @@ import { MovieRecommendation } from "@/types/movies";
 
 import placeholderImage from "@/assets/placeholder.webp";
 
-export default function MovieRecommendationCard({
+export default function MovieRecommendationPresentation({
 	imdbID,
 	Poster,
 	Title,

@@ -7,7 +7,7 @@ import { useRecommendations } from "@/hooks/useRecommendations";
 
 import { searchMovies } from "@/services/api";
 import { SkeletonList } from "@/ui/Skeleton";
-import MovieRecommendationCard from "@/features/movies/MovieRecommendationCard";
+import MovieRecommendationPresentation from "./MovieRecommendationPresentation";
 
 interface MovieRecommendationsProps {
 	movieId: string;
@@ -24,7 +24,7 @@ const extractTitlesFromRecommendations = (
 		.filter(Boolean);
 };
 
-export default function MovieRecommendations({
+export default function MovieRecommendationsContainer({
 	movieId,
 }: MovieRecommendationsProps) {
 	const { data: recommendationsData, isLoading: isLoadingRecs } =
@@ -71,7 +71,7 @@ export default function MovieRecommendations({
 						if (!movie) return null;
 
 						return (
-							<MovieRecommendationCard
+							<MovieRecommendationPresentation
 								key={movie.imdbID}
 								imdbID={movie.imdbID}
 								Poster={movie.Poster}

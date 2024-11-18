@@ -7,16 +7,9 @@ import { motion } from "framer-motion";
 
 import FavoriteButton from "@/ui/FavoriteButton";
 
-import placeholderImage from "@/assets/placeholder.webp";
+import { MovieCardPresentationProps } from "./MovieCard.types";
 
-interface MovieCardPresentationProps {
-	title: string;
-	year: string;
-	poster: string;
-	imdbID: string;
-	isFavorite: boolean;
-	onToggleFavorite: () => Promise<void>;
-}
+import placeholderImage from "@/assets/placeholder.webp";
 
 export default function MovieCardPresentation({
 	title,

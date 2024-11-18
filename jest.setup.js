@@ -30,8 +30,8 @@ jest.mock("next/navigation", () => ({
 	},
 	useSearchParams: () => ({
 		get: jest.fn(),
-		toString: () => '',
-	  }),
+		toString: () => "",
+	}),
 }));
 
 global.fetch = jest.fn(() =>

@@ -44,6 +44,8 @@ export interface FavoriteMovie {
 	poster: string;
 	year: string;
 	personalNotes?: string;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 export interface MovieRecommendation {

@@ -81,18 +81,65 @@ export function useFavorites() {
 	const { data: favorites = [], isLoading } = useQuery({
 		queryKey: ["favorites"],
 		queryFn: getFavorites,
+		staleTime: 1000 * 60 * 5,
 	});
 
 	const addMutation = useMutation({
 		mutationFn: addFavorite,
-		onSuccess: () => {
+		onMutate: async (newMovie) => {
+			await queryClient.cancelQueries({ queryKey: ["favorites"] });
+
+			const previousFavorites =
+				queryClient.getQueryData<FavoriteMovie[]>(["favorites"]) || [];
+
+			const optimisticFavorite: FavoriteMovie = {
+				_id: `temp-${newMovie.imdbID}`,
+				movieId: newMovie.imdbID,
+				userId: newMovie.userId || "",
+				title: newMovie.Title,
+				poster: newMovie.Poster,
+				year: newMovie.Year,
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			};
+
+			queryClient.setQueryData<FavoriteMovie[]>(["favorites"], (old = []) => [
+				...old,
+				optimisticFavorite,
+			]);
+
+			return { previousFavorites };
+		},
+		onError: (_error, _variables, context) => {
+			if (context) {
+				queryClient.setQueryData(["favorites"], context.previousFavorites);
+			}
+		},
+		onSettled: () => {
 			queryClient.invalidateQueries({ queryKey: ["favorites"] });
 		},
 	});
 
 	const removeMutation = useMutation({
 		mutationFn: removeFavorite,
-		onSuccess: () => {
+		onMutate: async (favoriteId) => {
+			await queryClient.cancelQueries({ queryKey: ["favorites"] });
+
+			const previousFavorites =
+				queryClient.getQueryData<FavoriteMovie[]>(["favorites"]) || [];
+
+			queryClient.setQueryData<FavoriteMovie[]>(["favorites"], (old = []) =>
+				old.filter((fav) => fav._id !== favoriteId)
+			);
+
+			return { previousFavorites };
+		},
+		onError: (_error, _variables, context) => {
+			if (context) {
+				queryClient.setQueryData(["favorites"], context.previousFavorites);
+			}
+		},
+		onSettled: () => {
 			queryClient.invalidateQueries({ queryKey: ["favorites"] });
 		},
 	});

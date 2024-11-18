@@ -16,12 +16,14 @@ export default function FavoriteButton({
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleClick = async () => {
+		if (isLoading) return;
+
 		setIsLoading(true);
+
 		try {
 			await onAdd();
-			await new Promise((resolve) => setTimeout(resolve, 500));
 		} finally {
-			setIsLoading(false);
+			setTimeout(() => setIsLoading(false), 200);
 		}
 	};
 
@@ -42,33 +44,32 @@ export default function FavoriteButton({
 		<button
 			onClick={handleClick}
 			disabled={isLoading}
-			className={`p-2 rounded-full transition-all duration-500 transform
-        ${isLoading ? "scale-125" : ""} 
-        ${
-					isFavorite
-						? "bg-red-600 hover:bg-red-700"
-						: "bg-gray-800/50 hover:bg-gray-700/50"
-				} 
-        ${className}
-        ${isLoading ? "animate-pulse" : ""}
-        relative
-        overflow-hidden
-      `}
+			className={`p-2 rounded-full transition-all duration-300
+		  ${isLoading ? "scale-125" : "scale-100"} 
+		  ${
+				isFavorite
+					? "bg-red-600 hover:bg-red-700"
+					: "bg-gray-800/50 hover:bg-gray-700/50"
+			} 
+		  ${className}
+		  relative
+		  overflow-hidden
+		`}
 			aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
 		>
 			<div
-				className={`transition-transform duration-500 ${
-					isLoading ? "scale-110" : ""
+				className={`transition-transform duration-300 ${
+					isLoading ? "scale-110" : "scale-100"
 				}`}
 			>
 				{isLoading ? (
 					<Loader2 className="w-5 h-5 text-white animate-spin" />
 				) : (
 					<Heart
-						className={`w-5 h-5 transition-all duration-300 transform
-              ${isFavorite ? "text-white fill-current scale-110" : "text-white"}
-              hover:scale-125
-            `}
+						className={`w-5 h-5 transition-all duration-300
+				${isFavorite ? "text-white fill-current" : "text-white"}
+				${isLoading ? "scale-110" : "scale-100"}
+			  `}
 					/>
 				)}
 			</div>

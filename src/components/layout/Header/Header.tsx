@@ -19,7 +19,7 @@ export default function Header() {
 					</div>
 				</Link>
 
-				<nav className="flex items-center gap-4">
+				<nav className="flex items-center gap-4 z-20">
 					<UserNavigation />
 				</nav>
 			</div>

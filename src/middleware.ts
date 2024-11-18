@@ -4,7 +4,7 @@ import { NextResponse, NextRequest } from "next/server";
 export async function middleware(req: NextRequest) {
 	if (
 		req.nextUrl.pathname.startsWith("/proxy") ||
-		req.nextUrl.pathname.startsWith("/movie/proxy")
+		req.nextUrl.pathname.startsWith("/movie")
 	) {
 		const res = NextResponse.next();
 		const session = await getSession(req, res);
@@ -20,5 +20,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/proxy/:path*"],
+	matcher: ["/proxy/:path*", "/movie/:path*"],
 };

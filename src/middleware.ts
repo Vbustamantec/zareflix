@@ -2,20 +2,22 @@ import { getSession } from "@auth0/nextjs-auth0/edge";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
-	if (req.nextUrl.pathname.startsWith("/proxy")) {
-		const res = NextResponse.next();
-		const session = await getSession(req, res);
+	const res = NextResponse.next();
+	const session = await getSession(req, res);
 
-		if (session?.accessToken) {
-			res.headers.set("Authorization", `Bearer ${session.accessToken}`);
-		}
-
-		return res;
+	if (!session) {
+		const loginUrl = new URL("/api/auth/login", req.url);
+		loginUrl.searchParams.set("redirectTo", req.nextUrl.pathname);
+		return NextResponse.redirect(loginUrl);
 	}
 
-	return NextResponse.next();
+	if (req.nextUrl.pathname.startsWith("/proxy") && session?.accessToken) {
+		res.headers.set("Authorization", `Bearer ${session.accessToken}`);
+	}
+
+	return res;
 }
 
 export const config = {
-	matcher: ["/proxy/:path*"],
+	matcher: ["/proxy/:path*", "/:path*"],
 };

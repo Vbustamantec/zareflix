@@ -6,6 +6,7 @@ import { useMovieSearch } from "@/hooks/useMoviesSearch";
 import MovieCard from "@/features/movies/MovieCard";
 import { SkeletonList } from "@/ui/Skeleton";
 import Pagination from "@/ui/Pagination";
+import { EmptyState } from "./EmptyState";
 
 export default function MovieList() {
 	const {
@@ -30,11 +31,7 @@ export default function MovieList() {
 	}
 
 	if (!movies.length) {
-		return (
-			<p className="text-white lg:mt-12 text-center text-3xl font-bold">
-				There are no movies to show yet 😢
-			</p>
-		);
+		return <EmptyState />;
 	}
 
 	return (

@@ -1,4 +1,5 @@
 "use client";
+
 import { useFavorites } from "@/hooks/useFavorites";
 import { SkeletonList } from "@/components/ui/Skeleton";
 import FavoriteCard from "@/components/features/favorites/FavoriteCard/FavoriteCard";

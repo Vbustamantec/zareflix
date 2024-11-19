@@ -1,6 +1,6 @@
 import { searchMovies } from "@/services/api";
 
-import { MovieRecommendation } from "@/types/movies";
+import { BasicMovie } from "@/types/movies";
 
 const DEFAULT_MOVIES = [
 	"The Godfather",
@@ -23,7 +23,7 @@ export const extractTitlesFromRecommendations = (
 
 export const padRecommendations = async (
 	titles: string[]
-): Promise<MovieRecommendation[]> => {
+): Promise<BasicMovie[]> => {
 	const neededExtra = Math.max(0, 5 - titles.length);
 	const paddingTitles = DEFAULT_MOVIES.slice(0, neededExtra);
 	const allTitles = [...new Set([...titles, ...paddingTitles])];

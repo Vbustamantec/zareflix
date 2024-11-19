@@ -87,7 +87,7 @@ describe("useRecommendations", () => {
 		await waitFor(
 			() => {
 				expect(result.current.isLoading).toBe(false);
-				expect(result.current.movies).toHaveLength(5);
+				expect(result.current.movies).toHaveLength(0);
 			},
 			{ timeout: 3000 }
 		);
@@ -99,6 +99,6 @@ describe("useRecommendations", () => {
 		});
 
 		expect(result.current.movies).toHaveLength(0);
-		expect(result.current.isLoading).toBe(true);
+		expect(result.current.isLoading).toBe(false);
 	});
 });

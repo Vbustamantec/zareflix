@@ -3,7 +3,7 @@ export interface BasicMovie {
 	Title: string;
 	Year: string;
 	imdbID: string;
-	Type: string;
+	Type?: string;
 	Poster: string;
 }
 
@@ -48,9 +48,11 @@ export interface FavoriteMovie {
 	updatedAt: Date;
 }
 
-export interface MovieRecommendation {
-	Title: string;
-	Year: string;
-	imdbID: string;
-	Poster: string;
+export interface RecommendationResponse {
+	movie: {
+		title: string;
+		genre: string;
+		year: string;
+	};
+	recommendations: BasicMovie[];
 }

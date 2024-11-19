@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { MovieRecommendation } from "@/types/movies";
+import { BasicMovie } from "@/types/movies";
 
 import placeholderImage from "@/assets/placeholder.webp";
 
@@ -11,7 +11,7 @@ export default function MovieRecommendationPresentation({
 	Poster,
 	Title,
 	Year,
-}: MovieRecommendation) {
+}: BasicMovie) {
 	return (
 		<>
 			<Link

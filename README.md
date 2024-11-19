@@ -85,7 +85,8 @@ src/
 ├── app/                    # Next.js 13+ app directory
 │   ├── layout.tsx         # Root layout
 │   ├── page.tsx           # Home page
-│   └── movie/[id]/        # Movie details routes
+│   ├── movie/[id]/        # Movie details routes
+│   └── favorites/        # Favorites movie route (protected)
 ├── components/
 │   ├── features/          # Feature-specific components
 │   ├── layout/            # Layout components

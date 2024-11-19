@@ -1,8 +1,10 @@
 import { useEditable } from "@/hooks/useEditable";
+
 import { EditableForm } from "./EditableForm";
 import { ActionButtons } from "./ActionButtons";
-import { EditableContentProps } from "./EditableContent.types";
 import { ExpandableNotes } from "./EditableNotes";
+
+import { EditableContentProps } from "./EditableContent.types";
 
 export default function EditableContent({
 	initialTitle,

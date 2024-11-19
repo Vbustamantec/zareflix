@@ -48,6 +48,7 @@ export function EditableForm({
 					onClick={onCancel}
 					className="p-2 text-gray-400 hover:text-white transition-colors"
 					disabled={isUpdating}
+					aria-label="Cancel"
 				>
 					<X size={20} />
 				</button>
@@ -55,6 +56,7 @@ export function EditableForm({
 					onClick={onSave}
 					className="p-2 text-green-500 hover:text-green-400 transition-colors"
 					disabled={isUpdating}
+					aria-label="Save"
 				>
 					<Check size={20} />
 				</button>

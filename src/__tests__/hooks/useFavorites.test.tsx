@@ -24,10 +24,20 @@ describe("useFavorites", () => {
 		<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 	);
 
-	it("initializes with empty favorites", () => {
+	it("initializes with empty favorites", async () => {
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({ data: [] }),
+		});
+
 		const { result } = renderHook(() => useFavorites(), { wrapper });
+
 		expect(result.current.favorites).toEqual([]);
 		expect(result.current.isLoading).toBe(true);
+
+		await waitFor(() => {
+			expect(result.current.isLoading).toBe(false);
+		});
 	});
 
 	it("fetches favorites successfully", async () => {
@@ -57,6 +67,7 @@ describe("useFavorites", () => {
 
 		await waitFor(() => {
 			expect(result.current.favorites).toEqual(mockFavorites);
+			expect(result.current.isLoading).toBe(false);
 		});
 	});
 
@@ -78,34 +89,39 @@ describe("useFavorites", () => {
 			poster: "poster.jpg",
 		};
 
-		(global.fetch as jest.Mock).mockResolvedValueOnce({
-			ok: true,
-			json: async () => ({ data: mockResponse }),
+		(global.fetch as jest.Mock).mockImplementation(async (url) => {
+			if (url === "proxy/favorites") {
+				return {
+					ok: true,
+					json: async () => ({ data: mockResponse }),
+				};
+			}
+			return {
+				ok: true,
+				json: async () => ({ data: [] }),
+			};
 		});
 
 		const { result } = renderHook(() => useFavorites(), { wrapper });
 
 		await act(async () => {
 			await result.current.addFavorite(mockMovie);
-			await queryClient.setQueryData(["favorites"], [mockResponse]);
 		});
 
-		expect(global.fetch).toHaveBeenCalledWith(
-			"/proxy/favorites",
-			expect.objectContaining({
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					userId: mockMovie.userId,
-					movieId: mockMovie.imdbID,
-					title: mockMovie.Title,
-					poster: mockMovie.Poster,
-					year: mockMovie.Year,
-				}),
-			})
-		);
+		expect(global.fetch).toHaveBeenCalledWith("proxy/favorites", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+			body: JSON.stringify({
+				userId: mockMovie.userId,
+				movieId: mockMovie.imdbID,
+				title: mockMovie.Title,
+				poster: mockMovie.Poster,
+				year: mockMovie.Year,
+			}),
+		});
 	});
 
 	it("handles removing favorite", async () => {
@@ -119,26 +135,30 @@ describe("useFavorites", () => {
 			},
 		];
 
-		await queryClient.setQueryData(["favorites"], mockFavorites);
-
-		(global.fetch as jest.Mock).mockResolvedValueOnce({
-			ok: true,
+		(global.fetch as jest.Mock).mockImplementation(async (url) => {
+			if (url === "proxy/favorites/1") {
+				return { ok: true };
+			}
+			return {
+				ok: true,
+				json: async () => ({ data: mockFavorites }),
+			};
 		});
 
 		const { result } = renderHook(() => useFavorites(), { wrapper });
 
-		await act(async () => {
-			await result.current.removeFavorite("1");
-			// Actualizar el caché después de eliminar
-			await queryClient.setQueryData(["favorites"], []);
+		await waitFor(() => {
+			expect(result.current.favorites).toEqual(mockFavorites);
 		});
 
-		expect(global.fetch).toHaveBeenCalledWith(
-			"/proxy/favorites/1",
-			expect.objectContaining({
-				method: "DELETE",
-			})
-		);
+		await act(async () => {
+			await result.current.removeFavorite("1");
+		});
+
+		expect(global.fetch).toHaveBeenCalledWith("proxy/favorites/1", {
+			method: "DELETE",
+			credentials: "include",
+		});
 	});
 
 	it("checks if movie is favorite correctly", async () => {
@@ -152,17 +172,17 @@ describe("useFavorites", () => {
 			},
 		];
 
+		(global.fetch as jest.Mock).mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({ data: mockFavorites }),
+		});
+
 		const { result } = renderHook(() => useFavorites(), { wrapper });
 
-		await act(async () => {
-			await queryClient.setQueryData(["favorites"], mockFavorites);
+		await waitFor(() => {
+			expect(result.current.favorites).toEqual(mockFavorites);
 		});
 
-		await act(async () => {
-			await new Promise((resolve) => setTimeout(resolve, 0));
-		});
-
-		expect(result.current.favorites).toEqual(mockFavorites);
 		expect(result.current.isFavorite("tt1")).toBe(true);
 		expect(result.current.isFavorite("tt999")).toBe(false);
 	});
@@ -177,9 +197,17 @@ describe("useFavorites", () => {
 			personalNotes: "Great movie!",
 		};
 
-		(global.fetch as jest.Mock).mockResolvedValueOnce({
-			ok: true,
-			json: async () => ({ data: mockUpdatedFavorite }),
+		(global.fetch as jest.Mock).mockImplementation(async (url) => {
+			if (url === "/proxy/favorites/1") {
+				return {
+					ok: true,
+					json: async () => ({ data: mockUpdatedFavorite }),
+				};
+			}
+			return {
+				ok: true,
+				json: async () => ({ data: [] }),
+			};
 		});
 
 		const { result } = renderHook(() => useFavorites(), { wrapper });
@@ -188,16 +216,13 @@ describe("useFavorites", () => {
 			await result.current.updateFavorite({ id: "1", notes: "Nice Movie" });
 		});
 
-		expect(global.fetch).toHaveBeenCalledWith(
-			"/proxy/favorites/1",
-			expect.objectContaining({
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ personalNotes: "Nice Movie" }),
-			})
-		);
+		expect(global.fetch).toHaveBeenCalledWith("/proxy/favorites/1", {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ personalNotes: "Nice Movie", title: undefined }),
+		});
 	});
 
 	it("handles errors when fetching favorites", async () => {
@@ -207,10 +232,9 @@ describe("useFavorites", () => {
 
 		const { result } = renderHook(() => useFavorites(), { wrapper });
 
-		expect(result.current.isLoading).toBe(true);
-		await act(async () => {
-			await new Promise((resolve) => setTimeout(resolve, 0));
+		await waitFor(() => {
+			expect(result.current.favorites).toEqual([]);
+			expect(result.current.isLoading).toBe(false);
 		});
-		expect(result.current.favorites).toEqual([]);
 	});
 });

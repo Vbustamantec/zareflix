@@ -1,10 +1,13 @@
 "use client";
 
 import React from "react";
+
+import Link from "next/link";
+
 import { useUser } from "@auth0/nextjs-auth0/client";
+
 import Skeleton from "@/components/ui/Skeleton/Skeleton";
 import UserMenu from "./UserMenu";
-import Link from "next/link";
 
 export default function UserNavigation() {
 	const { user, isLoading } = useUser();

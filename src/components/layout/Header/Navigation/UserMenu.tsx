@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+
 import { ChevronDown } from "lucide-react";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 
@@ -28,7 +30,7 @@ export default function UserMenu({ user }: UserMenuProps) {
 				<div className="relative w-8 h-8 rounded overflow-hidden">
 					{user.picture ? (
 						<Image
-							src={user.picture}
+							src={user.picture || "placeHolderUserImage.png"}
 							alt="Profile"
 							fill
 							sizes="(max-width: 640px) 100vw, 640px"

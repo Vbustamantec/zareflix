@@ -31,13 +31,13 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${robotoFlex.variable} font-sans min-h-screen flex flex-col antialiased bg-black`}
+				className={`${robotoFlex.variable} font-sans min-h-screen flex flex-col antialiased scroll-smooth bg-black`}
 			>
 				<QueryClientContext>
 					<UserProvider>
 						<AutoSync />
 						<Header />
-						<main className="flex-grow">{children}</main>
+						<main className="flex-grow pt-16">{children}</main>
 						<Footer />
 					</UserProvider>
 				</QueryClientContext>

@@ -6,6 +6,7 @@ import { useMovieSearch } from "@/hooks/useMoviesSearch";
 import MovieCard from "@/features/movies/MovieCard";
 import { SkeletonList } from "@/ui/Skeleton";
 import Pagination from "@/ui/Pagination";
+
 import { EmptyState } from "./EmptyState";
 
 export default function MovieList() {

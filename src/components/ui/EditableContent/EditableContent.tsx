@@ -1,10 +1,8 @@
-import { useState } from "react";
-
+import { useEditable } from "@/hooks/useEditable";
 import { EditableForm } from "./EditableForm";
-import { ExpandableNotes } from "./EditableNotes";
 import { ActionButtons } from "./ActionButtons";
-
 import { EditableContentProps } from "./EditableContent.types";
+import { ExpandableNotes } from "./EditableNotes";
 
 export default function EditableContent({
 	initialTitle,
@@ -15,28 +13,16 @@ export default function EditableContent({
 	isUpdating,
 	isRemoving,
 }: EditableContentProps) {
-	const [isEditing, setIsEditing] = useState(false);
-	const [isExpanded, setIsExpanded] = useState(false);
-	const [editData, setEditData] = useState({
-		title: initialTitle,
-		notes: initialNotes,
-	});
-
-	const handleSave = () => {
-		onUpdate({
-			title: editData.title,
-			personalNotes: editData.notes,
-		});
-		setIsEditing(false);
-	};
-
-	const handleCancel = () => {
-		setEditData({
-			title: initialTitle,
-			notes: initialNotes,
-		});
-		setIsEditing(false);
-	};
+	const {
+		isEditing,
+		isExpanded,
+		editData,
+		setEditData,
+		handleSave,
+		handleCancel,
+		toggleExpand,
+		startEditing,
+	} = useEditable(initialTitle, initialNotes, onUpdate);
 
 	if (isEditing) {
 		return (
@@ -58,15 +44,13 @@ export default function EditableContent({
 			</div>
 
 			<div className="mt-4">
-				<div className="text-gray-400">
-					<ExpandableNotes
-						notes={initialNotes}
-						isExpanded={isExpanded}
-						onToggle={() => setIsExpanded(!isExpanded)}
-					/>
-				</div>
+				<ExpandableNotes
+					notes={initialNotes}
+					isExpanded={isExpanded}
+					onToggle={toggleExpand}
+				/>
 				<ActionButtons
-					onEdit={() => setIsEditing(true)}
+					onEdit={startEditing}
 					onRemove={onRemove}
 					isUpdating={isUpdating}
 					isRemoving={isRemoving}

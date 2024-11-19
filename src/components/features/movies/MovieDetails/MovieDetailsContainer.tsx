@@ -1,9 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useUser } from "@auth0/nextjs-auth0/client";
-
-import { useFavorites } from "@/hooks/useFavorites";
 
 import MovieRecommendationsContainer from "@/features/movies/MovieRecommendations";
 import MovieDetailsPresentation from "./MovieDetailsPresentation";
@@ -11,35 +8,6 @@ import MovieDetailsPresentation from "./MovieDetailsPresentation";
 import { MovieDetailsProps } from "./MovieDetails.types";
 
 export default function MovieDetailsContainer({ movie }: MovieDetailsProps) {
-	const { user } = useUser();
-	const { isFavorite, addFavorite, removeFavorite, getFavoriteById } =
-		useFavorites();
-
-	const favorite = getFavoriteById(movie.imdbID);
-	const isMovieFavorite = isFavorite(movie.imdbID);
-
-	const handleToggleFavorite = async () => {
-		if (!user?.sub) return;
-
-		try {
-			if (isMovieFavorite && favorite) {
-				await removeFavorite(favorite._id);
-			} else {
-				const movieToAdd = {
-					Title: movie.Title,
-					Year: movie.Year,
-					imdbID: movie.imdbID,
-					Type: movie.Type,
-					Poster: movie.Poster,
-					userId: user.sub,
-				};
-				await addFavorite(movieToAdd);
-			}
-		} catch (error) {
-			console.error("Error toggling favorite:", error);
-		}
-	};
-
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -60,11 +28,7 @@ export default function MovieDetailsContainer({ movie }: MovieDetailsProps) {
 				/>
 
 				<div className="relative container mx-auto px-4 py-12">
-					<MovieDetailsPresentation
-						movie={movie}
-						isMovieFavorite={isMovieFavorite}
-						onToggleFavorite={handleToggleFavorite}
-					/>
+					<MovieDetailsPresentation movie={movie} />
 
 					<div className="mt-16">
 						<MovieRecommendationsContainer movieId={movie.imdbID} />

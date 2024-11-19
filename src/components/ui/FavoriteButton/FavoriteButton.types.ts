@@ -1,5 +1,6 @@
+import { BasicMovie } from "@/types/movies";
+
 export interface FavoriteButtonProps {
-	onAdd: () => Promise<void>;
-	isFavorite?: boolean;
+	movie: BasicMovie
 	className?: string;
   }

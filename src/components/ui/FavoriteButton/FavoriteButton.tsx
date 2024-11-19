@@ -1,18 +1,13 @@
-"use client";
-
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { Heart, Loader2 } from "lucide-react";
 import { useFavoriteButton } from "@/hooks/useFavoriteButton";
-import { getButtonStyles, getHeartStyles } from "@/utils/favoriteButtonUtils";
+import { Heart, Loader2 } from "lucide-react";
 import { FavoriteButtonProps } from "./FavoriteButton.types";
 
 export default function FavoriteButton({
-	onAdd,
-	isFavorite = false,
+	movie,
 	className = "",
 }: FavoriteButtonProps) {
-	const { user } = useUser();
-	const { isLoading, handleClick } = useFavoriteButton(onAdd);
+	const { handleToggle, isLoading, isMovieFavorite, user } =
+		useFavoriteButton(movie);
 
 	if (!user) {
 		return (
@@ -30,10 +25,20 @@ export default function FavoriteButton({
 
 	return (
 		<button
-			onClick={handleClick}
+			onClick={handleToggle}
 			disabled={isLoading}
-			className={getButtonStyles(isLoading, isFavorite, className)}
-			aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+			className={`p-2 rounded-full transition-all duration-300
+		  ${isLoading ? "scale-125" : "scale-100"} 
+		  ${
+				isMovieFavorite
+					? "bg-red-600 hover:bg-red-700"
+					: "bg-gray-800/50 hover:bg-gray-700/50"
+			} 
+		  ${className} relative overflow-hidden`}
+			aria-label={
+				isMovieFavorite ? "Remove from favorites" : "Add to favorites"
+			}
+			aria-pressed={isMovieFavorite}
 		>
 			<div
 				className={`transition-transform duration-300 ${
@@ -43,7 +48,11 @@ export default function FavoriteButton({
 				{isLoading ? (
 					<Loader2 className="w-5 h-5 text-white animate-spin" />
 				) : (
-					<Heart className={getHeartStyles(isLoading, isFavorite)} />
+					<Heart
+						className={`w-5 h-5 transition-all duration-300
+			  ${isMovieFavorite ? "text-white fill-current" : "text-white"}
+			  ${isLoading ? "scale-110" : "scale-100"}`}
+					/>
 				)}
 			</div>
 		</button>

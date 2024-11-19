@@ -3,8 +3,6 @@ import { LucideIcon } from "lucide-react";
 
 export interface MovieDetailsPresentationProps {
 	movie: MovieDetails;
-	isMovieFavorite: boolean;
-	onToggleFavorite: () => Promise<void>;
 }
 
 export interface MovieDetailsProps {

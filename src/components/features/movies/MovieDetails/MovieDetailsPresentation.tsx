@@ -11,13 +11,25 @@ import { MovieDetailsPresentationProps } from "./MovieDetails.types";
 
 export default function MovieDetailsPresentation({
 	movie,
-	isMovieFavorite,
-	onToggleFavorite,
 }: MovieDetailsPresentationProps) {
+	const {
+		Title: title,
+		Year: year,
+		Runtime: runtime,
+		Rated: rated,
+		Genre: genre,
+		Plot: plot,
+		Director: director,
+		Actors: actors,
+		Awards: awards,
+		imdbRating: imdbRating,
+		Poster: poster,
+	} = movie;
+
 	const metadata = [
-		{ icon: Calendar, label: movie.Year },
-		{ icon: Clock, label: movie.Runtime },
-		{ icon: Award, label: movie.Rated },
+		{ icon: Calendar, label: year },
+		{ icon: Clock, label: runtime },
+		{ icon: Award, label: rated },
 	];
 
 	return (
@@ -29,8 +41,8 @@ export default function MovieDetailsPresentation({
 				className="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-2xl"
 			>
 				<Image
-					src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
-					alt={movie.Title}
+					src={poster !== "N/A" ? poster : "/placeholder.png"}
+					alt={title}
 					fill
 					className="object-cover"
 					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -46,21 +58,17 @@ export default function MovieDetailsPresentation({
 				<div className="space-y-4">
 					<div className="flex items-start justify-between gap-4">
 						<h1 className="text-4xl md:text-5xl font-bold text-white">
-							{movie.Title}
+							{title}
 						</h1>
 						<div className="relative z-50 shrink-0">
-							<FavoriteButton
-								onAdd={onToggleFavorite}
-								isFavorite={isMovieFavorite}
-								className="shadow-lg"
-							/>
+							<FavoriteButton movie={movie} className="shadow-lg" />
 						</div>
 					</div>
 
 					<div className="flex flex-wrap items-center gap-4">
-						<RatingBadge rating={movie.imdbRating} />
+						<RatingBadge rating={imdbRating} />
 						<div className="h-6 w-px bg-gray-700" />
-						<span className="text-gray-400">{movie.Genre}</span>
+						<span className="text-gray-400">{genre}</span>
 					</div>
 				</div>
 
@@ -68,24 +76,24 @@ export default function MovieDetailsPresentation({
 
 				<div className="space-y-3">
 					<h2 className="text-xl font-semibold text-white">Plot</h2>
-					<p className="text-gray-300 leading-relaxed">{movie.Plot}</p>
+					<p className="text-gray-300 leading-relaxed">{plot}</p>
 				</div>
 
 				<div className="space-y-4">
 					<div>
 						<h3 className="text-gray-400 mb-1">Director</h3>
-						<p className="text-white">{movie.Director}</p>
+						<p className="text-white">{director}</p>
 					</div>
 					<div>
 						<h3 className="text-gray-400 mb-1">Cast</h3>
-						<p className="text-white">{movie.Actors}</p>
+						<p className="text-white">{actors}</p>
 					</div>
 				</div>
 
-				{movie.Awards !== "N/A" && (
+				{awards !== "N/A" && (
 					<div className="bg-red-900/20 p-4 rounded-lg border border-red-900/30">
 						<h3 className="text-red-500 font-semibold mb-2">Awards</h3>
-						<p className="text-gray-300">{movie.Awards}</p>
+						<p className="text-gray-300">{awards}</p>
 					</div>
 				)}
 			</motion.div>

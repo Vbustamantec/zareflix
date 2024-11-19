@@ -29,12 +29,9 @@
 ## 📚 Table of Contents
 
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
+- [Tech Stack](#tech-stack)
 - [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Development](#-development)
-- [Testing](#-testing)
-- [Deployment](#-deployment)
+- [Getting Started](#getting-started)
 
 ## 🌟 Features
 
@@ -54,7 +51,7 @@
 - Error boundaries and fallbacks
 - Toast notifications for user actions
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Core
 
@@ -100,7 +97,7 @@ src/
 └── utils/                # Utility functions
 ```
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 

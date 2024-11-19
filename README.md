@@ -17,13 +17,13 @@
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="public/screenshots/search.webp" alt="Search Feature" width="45%"/>
-  <img src="public/screenshots/details.webp" alt="Movie Details" width="45%"/>
+  <img src="public/screenshots/search.webp" alt="Search Feature" width="100%"/>
+  <img src="public/screenshots/details.webp" alt="Movie Details" width="100%"/>
 </div>
 
 <div align="center">
-  <img src="public/screenshots/recommendations.webp" alt="AI Recommendations" width="45%"/>
-  <img src="public/screenshots/favorites.webp" alt="Favorites Management" width="45%"/>
+  <img src="public/screenshots/recommendations.webp" alt="AI Recommendations" width="100%"/>
+  <img src="public/screenshots/favorites.webp" alt="Favorites Management" width="100%"/>
 </div>
 
 ## 📚 Table of Contents

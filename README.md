@@ -155,4 +155,4 @@ npm start
 - Auth0 for authentication
 - Hugging Face for AI capabilities
 - Next.js team for the framework
-- Vercel for inspiration
+- AWS Amplify for inspiration and deployment 

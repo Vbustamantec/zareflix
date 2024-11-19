@@ -28,7 +28,7 @@ export default function MovieCardPresentation({
 			className="movie-card relative p-4 bg-dark-gray rounded-md group flex flex-col justify-between flex-grow"
 		>
 			<div className="flex-grow">
-				<div className="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 max-lg:opacity-100 transition-opacity duration-300">
+				<div className="absolute z-50 top-6 right-6 opacity-0 group-hover:opacity-100 max-lg:opacity-100 transition-opacity duration-300">
 					<FavoriteButton
 						isFavorite={isFavorite}
 						onAdd={onToggleFavorite}
@@ -36,7 +36,7 @@ export default function MovieCardPresentation({
 					/>
 				</div>
 
-				<div className="relative w-full h-96 mb-2 rounded-md overflow-hidden">
+				<div className="relative w-full h-96 mb-2 rounded-md overflow-hidden z-10">
 					<div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 					<Image
 						src={poster !== "N/A" ? poster : placeholderImage}

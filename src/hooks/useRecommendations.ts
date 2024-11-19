@@ -9,7 +9,7 @@ import {
 
 import { MovieRecommendation } from "@/types/movies";
 
-export function useMovieRecommendations(movieId: string) {
+export function useRecommendations(movieId: string) {
 	const { data: aiRecommendations, isLoading: isLoadingAI } = useQuery({
 		queryKey: ["aiRecommendations", movieId],
 		queryFn: async () => {

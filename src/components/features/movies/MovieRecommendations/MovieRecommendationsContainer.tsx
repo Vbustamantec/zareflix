@@ -1,16 +1,16 @@
 import React from "react";
 import { SkeletonList } from "@/ui/Skeleton";
 import MovieRecommendationPresentation from "./MovieRecommendationPresentation";
-import { useMovieRecommendations } from "@/hooks/useRecommendations";
+import { useRecommendations } from "@/hooks/useRecommendations";
 
 interface MovieRecommendationsProps {
 	movieId: string;
 }
 
-export default function MovieRecommendations({
+export default function MovieRecommendationsContainer({
 	movieId,
 }: MovieRecommendationsProps) {
-	const { movies, isLoading } = useMovieRecommendations(movieId);
+	const { movies, isLoading } = useRecommendations(movieId);
 
 	if (isLoading) {
 		return (

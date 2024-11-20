@@ -8,6 +8,7 @@ import ErrorState from "@/components/ui/ErrorState/ErrorState";
 
 import FavoriteCard from "@/components/features/favorites/FavoriteCard/FavoriteCard";
 import SentimentAnalysis from "@/components/features/sentiment/SentimentAnalysis/SentimentAnalysis";
+import SentimentAnalysisEmpty from "@/components/features/sentiment/SentimentAnalysisEmpty";
 
 export default function FavoritesPage() {
 	const {
@@ -75,13 +76,15 @@ export default function FavoritesPage() {
 					/>
 				))}
 			</div>
-			{sentimentData && !isLoadingSentiment && (
+			{isLoadingSentiment ? (
+				<SentimentAnalysisEmpty />
+			) : sentimentData ? (
 				<SentimentAnalysis
 					sentiment={sentimentData.sentiment}
 					score={sentimentData.score}
 					className="mt-8"
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

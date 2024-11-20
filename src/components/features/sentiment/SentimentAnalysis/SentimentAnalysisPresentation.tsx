@@ -1,11 +1,4 @@
-import {
-	BarChart,
-	Bar,
-	XAxis,
-	YAxis,
-	Tooltip,
-	ResponsiveContainer,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { Smile, Meh, Frown } from "lucide-react";
 
 import { SentimentAnalysisPresentationProps } from "./SentimentAnalysis.types";
@@ -67,15 +60,6 @@ export default function SentimentAnalysisPresentation({
 						<BarChart data={emotionData} layout="vertical">
 							<XAxis type="number" domain={[0, 100]} />
 							<YAxis dataKey="name" type="category" />
-							<Tooltip
-								contentStyle={{
-									backgroundColor: "#1c1c21",
-									border: "none",
-									borderRadius: "0.5rem",
-									color: "#fff",
-								}}
-								formatter={(value) => [`${value}%`, "Intensity"]}
-							/>
 							<Bar dataKey="value" radius={[0, 4, 4, 0]} />
 						</BarChart>
 					</ResponsiveContainer>

@@ -7,25 +7,16 @@ const SentimentSummary = ({ score }: { score: number }) => {
 				Icon: Smile,
 				color: "#22c55e",
 				title: "Very Positive Outlook",
-				description: "Your notes reflect high satisfaction and enthusiasm",
+				description:
+					"Your notes reflect high satisfaction and enthusiasm for your favorites",
 			};
 		}
-
-		if (score > 0.5) {
-			return {
-				Icon: Smile,
-				color: "#22c55e",
-				title: "Generally Positive",
-				description: "Your feedback tends towards the positive side",
-			};
-		}
-
 		if (score >= 0.4 && score <= 0.6) {
 			return {
 				Icon: Meh,
 				color: "#eab308",
 				title: "Balanced Perspective",
-				description: "Your notes show a balanced point of view",
+				description: "You feel neutral about your favorites",
 			};
 		}
 
@@ -34,7 +25,8 @@ const SentimentSummary = ({ score }: { score: number }) => {
 				Icon: Meh,
 				color: "#ef4444",
 				title: "Mixed Feelings",
-				description: "Your notes indicate some areas of concern",
+				description:
+					"Your notes indicate some areas of concern in your favorites",
 			};
 		}
 
@@ -42,7 +34,7 @@ const SentimentSummary = ({ score }: { score: number }) => {
 			Icon: Frown,
 			color: "#ef4444",
 			title: "Areas for Improvement",
-			description: "Your notes suggest opportunities for enhancement",
+			description: "Your notes suggest you don't really like these movies",
 		};
 	};
 

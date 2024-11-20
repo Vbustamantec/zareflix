@@ -1,13 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BasicMovie, FavoriteMovie } from "@/types/movies";
-import { APIError } from "@/components/ui/ErrorBoundary/ErrorBoundary";
 
 async function getFavorites(): Promise<FavoriteMovie[]> {
 	const response = await fetch(`/proxy/favorites`, {
 		credentials: "include",
 	});
 	if (!response.ok) {
-		throw new APIError("Failed to fetch favorites");
+		throw new Error("Failed to fetch favorites");
 	}
 	const data = await response.json();
 	return data.data;

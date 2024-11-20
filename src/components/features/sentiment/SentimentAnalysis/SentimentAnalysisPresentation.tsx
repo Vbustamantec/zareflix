@@ -47,7 +47,11 @@ export default function SentimentAnalysisPresentation({
 						<BarChart data={emotionData} layout="vertical">
 							<XAxis type="number" domain={[0, 100]} />
 							<YAxis dataKey="name" type="category" />
-							<Bar dataKey="value" radius={[0, 4, 4, 0]} />
+							<Bar
+								dataKey="value"
+								radius={[0, 4, 4, 0]}
+								fill={emotionData[0].fill}
+							/>
 						</BarChart>
 					</ResponsiveContainer>
 				</div>

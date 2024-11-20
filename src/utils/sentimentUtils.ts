@@ -5,21 +5,21 @@ export const SENTIMENT_CONFIG = {
 		icon: Smile,
 		colorClass: "text-green-500",
 		bgClass: "bg-green-500/15",
-		progressClass: "bg-green-500",
+		progressClass: "#22c15e",
 		description: "Shows enthusiasm and satisfaction",
 	},
 	neutral: {
 		icon: Meh,
 		colorClass: "text-yellow-500",
 		bgClass: "bg-yellow-500/15",
-		progressClass: "bg-yellow-500",
+		progressClass: "#eab30e",
 		description: "Balanced or objective perspective",
 	},
 	negative: {
 		icon: Frown,
 		colorClass: "text-red-500",
 		bgClass: "bg-red-500/15",
-		progressClass: "bg-red-500",
+		progressClass: "#ef4444",
 		description: "Indicates areas for improvement",
 	},
 } as const;
@@ -64,20 +64,13 @@ export function getSentimentSummary(score: number): SentimentSummary {
 	};
 }
 
-export const calculateEmotionData = (score: number) => [
+export const calculateEmotionDataSingle = (
+	sentiment: SentimentType,
+	score: number
+) => [
 	{
-		name: "Joy",
+		name: sentiment.charAt(0).toUpperCase() + sentiment.slice(1),
 		value: Math.round(score * 100),
-		fill: "rgb(34, 197, 94)",
-	},
-	{
-		name: "Neutral",
-		value: Math.round((1 - Math.abs(score - 0.5)) * 100),
-		fill: "rgb(234, 179, 8)",
-	},
-	{
-		name: "Critical",
-		value: Math.round((1 - score) * 100),
-		fill: "rgb(239, 68, 68)",
+		fill: SENTIMENT_CONFIG[sentiment].progressClass,
 	},
 ];

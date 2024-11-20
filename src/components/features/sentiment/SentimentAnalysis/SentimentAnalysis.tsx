@@ -1,18 +1,19 @@
 import { useMemo } from "react";
 
-import { calculateEmotionData } from "@/utils/sentimentUtils";
-
 import SentimentAnalysisPresentation from "./SentimentAnalysisPresentation";
 
 import { SentimentAnalysisProps } from "./SentimentAnalysis.types";
+import { calculateEmotionDataSingle } from "@/utils/sentimentUtils";
 
 export default function SentimentAnalysis({
 	sentiment,
 	score,
 	className = "",
 }: SentimentAnalysisProps) {
-	const emotionData = useMemo(() => calculateEmotionData(score), [score]);
-
+	const emotionData = useMemo(
+		() => calculateEmotionDataSingle(sentiment, score),
+		[sentiment, score]
+	);
 	return (
 		<SentimentAnalysisPresentation
 			sentiment={sentiment}

@@ -28,7 +28,7 @@ export default function Header() {
 		<motion.header
 			className={`
         fixed top-0 left-0 right-0 
-        z-50 
+        z-[60] 
         transition-colors duration-300 ease-in-out
         ${
 					isScrolled

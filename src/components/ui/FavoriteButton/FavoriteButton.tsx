@@ -15,7 +15,7 @@ export default function FavoriteButton({
 				<button
 					disabled
 					aria-label="Login to add favorites"
-					className="p-2 rounded-full bg-gray-800/50 cursor-not-allowed z-[9999] hover:before:content-['Login_to_add_favorites'] hover:before:absolute hover:before:top-[-60px] hover:before:left-[40] hover:before:transform hover:before:-translate-x-1/2 hover:before:bg-black hover:before:text-white hover:before:py-2 hover:before:px-4 hover:before:rounded hover:before:text-sm hover:before:whitespace-nowrap"
+					className="p-2 rounded-full bg-gray-800/50 cursor-not-allowed z-50 hover:before:content-['Login_to_add_favorites'] hover:before:absolute hover:before:top-[-60px] hover:before:left-[40] hover:before:transform hover:before:-translate-x-1/2 hover:before:bg-black hover:before:text-white hover:before:py-2 hover:before:px-4 hover:before:rounded hover:before:text-sm hover:before:whitespace-nowrap"
 				>
 					<Heart className="w-5 h-5 text-gray-400" />
 				</button>

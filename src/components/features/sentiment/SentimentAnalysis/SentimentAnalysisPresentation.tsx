@@ -54,15 +54,6 @@ export default function SentimentAnalysisPresentation({
 
 				<SentimentSummary score={score} />
 			</div>
-
-			<div className="mt-6 p-4 bg-gray-800/30 rounded-lg">
-				<p className="text-sm text-gray-400 text-center">
-					{SENTIMENT_CONFIG[sentiment].description}
-					{score > 0.8 && " with very high positivity"}
-					{score < 0.2 && " with significant concerns"}
-					{score >= 0.4 && score <= 0.6 && " with balanced viewpoints"}
-				</p>
-			</div>
 		</div>
 	);
 }

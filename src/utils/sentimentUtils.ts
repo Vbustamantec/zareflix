@@ -68,16 +68,16 @@ export const calculateEmotionData = (score: number) => [
 	{
 		name: "Joy",
 		value: Math.round(score * 100),
-		fill: SENTIMENT_CONFIG.positive.progressClass.replace("bg-", ""),
+		fill: "rgb(34, 197, 94)",
 	},
 	{
 		name: "Neutral",
 		value: Math.round((1 - Math.abs(score - 0.5)) * 100),
-		fill: SENTIMENT_CONFIG.neutral.progressClass.replace("bg-", ""),
+		fill: "rgb(234, 179, 8)",
 	},
 	{
 		name: "Critical",
 		value: Math.round((1 - score) * 100),
-		fill: SENTIMENT_CONFIG.negative.progressClass.replace("bg-", ""),
+		fill: "rgb(239, 68, 68)",
 	},
 ];

@@ -2,15 +2,11 @@
 
 import { motion } from "framer-motion";
 
-const MovieRecommendationsContainer = lazy(
-	() => import("@/features/movies/MovieRecommendations")
-);
+import MovieRecommendationsContainer from "@/features/movies/MovieRecommendations";
 
 import MovieDetailsPresentation from "./MovieDetailsPresentation";
 
 import { MovieDetailsProps } from "./MovieDetails.types";
-import { lazy, Suspense } from "react";
-import { SkeletonList } from "@/components/ui/Skeleton";
 
 export default function MovieDetailsContainer({ movie }: MovieDetailsProps) {
 	return (
@@ -36,18 +32,7 @@ export default function MovieDetailsContainer({ movie }: MovieDetailsProps) {
 					<MovieDetailsPresentation movie={movie} />
 
 					<div className="mt-16">
-						<Suspense
-							fallback={
-								<div className="mt-8">
-									<h2 className="text-2xl font-bold text-white mb-4">
-										Loading Recommendations...
-									</h2>
-									<SkeletonList variant="favorite" />
-								</div>
-							}
-						>
-							<MovieRecommendationsContainer movieId={movie.imdbID} />
-						</Suspense>
+						<MovieRecommendationsContainer movieId={movie.imdbID} />
 					</div>
 				</div>
 			</div>

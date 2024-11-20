@@ -8,7 +8,7 @@ import ErrorState from "@/components/ui/ErrorState/ErrorState";
 
 import FavoriteCard from "@/components/features/favorites/FavoriteCard/FavoriteCard";
 import SentimentAnalysis from "@/components/features/sentiment/SentimentAnalysis/SentimentAnalysis";
-import SentimentAnalysisEmpty from "@/components/features/sentiment/SentimentAnalysisEmpty";
+import SentimentAnalysisEmpty from "@/components/features/sentiment/SentimentAnalysis/SentimentAnalysisEmpty";
 
 export default function FavoritesPage() {
 	const {

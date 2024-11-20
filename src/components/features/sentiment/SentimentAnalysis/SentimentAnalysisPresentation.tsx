@@ -1,26 +1,10 @@
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
-import { Smile, Meh, Frown } from "lucide-react";
 
-import { SentimentAnalysisPresentationProps } from "./SentimentAnalysis.types";
+import { SENTIMENT_CONFIG } from "@/utils/sentimentUtils";
+
 import SentimentSummary from "./SentimentSummary";
 
-const SENTIMENT_CONFIG = {
-	positive: {
-		icon: Smile,
-		color: "#22c55e",
-		description: "Shows enthusiasm and satisfaction",
-	},
-	neutral: {
-		icon: Meh,
-		color: "#eab308",
-		description: "Balanced or objective perspective",
-	},
-	negative: {
-		icon: Frown,
-		color: "#ef4444",
-		description: "Indicates areas for improvement",
-	},
-};
+import { SentimentAnalysisPresentationProps } from "./SentimentAnalysis.types";
 
 export default function SentimentAnalysisPresentation({
 	sentiment,
@@ -31,7 +15,7 @@ export default function SentimentAnalysisPresentation({
 	const SentimentIcon = SENTIMENT_CONFIG[sentiment].icon;
 
 	return (
-		<div className={`bg-dark-gray rounded-lg p-6 ${className}`}>
+		<div className={`bg-dark-gray rounded-lg p-6 ${className}`}  data-testid="sentiment-container">
 			<div className="flex items-center justify-between mb-6">
 				<div className="space-y-2">
 					<h2 className="text-xl font-bold text-white">Emotional Analysis</h2>
@@ -41,8 +25,8 @@ export default function SentimentAnalysisPresentation({
 				</div>
 				<div className="flex items-center gap-3 bg-gray-800/50 p-3 rounded-lg">
 					<SentimentIcon
-						className="w-6 h-6"
-						style={{ color: SENTIMENT_CONFIG[sentiment].color }}
+						className={`w-6 h-6 ${SENTIMENT_CONFIG[sentiment].colorClass}`}
+						 data-testid="sentiment-icon"
 					/>
 					<div className="text-right">
 						<div className="text-white capitalize font-medium">{sentiment}</div>

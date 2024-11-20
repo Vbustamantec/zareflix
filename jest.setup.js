@@ -19,6 +19,33 @@ jest.mock("next/image", () => ({
 	},
 }));
 
+class ResizeObserver {
+	observe() {}
+	unobserve() {}
+	disconnect() {}
+}
+
+window.ResizeObserver = ResizeObserver;
+
+jest.mock("recharts", () => ({
+	...jest.requireActual("recharts"),
+	ResponsiveContainer: ({ children, width, height }) => (
+		<div className="recharts-responsive-container" style={{ width, height }}>
+			{children}
+		</div>
+	),
+	BarChart: ({ children }) => (
+		<div className="recharts-bar-chart">{children}</div>
+	),
+	Bar: ({ children }) => (
+		<div role="bar" data-testid="sentiment-bar">
+			{children}
+		</div>
+	),
+	XAxis: () => null,
+	YAxis: () => null,
+}));
+
 jest.mock("next/navigation", () => ({
 	useRouter() {
 		return {

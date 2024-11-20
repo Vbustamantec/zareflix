@@ -1,5 +1,7 @@
+export type SentimentType = "positive" | "negative" | "neutral";
+
 export interface SentimentAnalysisProps {
-	sentiment: "positive" | "negative" | "neutral";
+	sentiment: SentimentType;
 	score: number;
 	className?: string;
 }

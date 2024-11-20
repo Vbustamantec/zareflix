@@ -1,11 +1,12 @@
 "use client";
 
 import { useSentimentAnalysis } from "@/hooks/useSentimentAnalysis";
-
 import { useFavorites } from "@/hooks/useFavorites";
-import { SkeletonList } from "@/components/ui/Skeleton";
+
 import FavoriteCard from "@/components/features/favorites/FavoriteCard/FavoriteCard";
 import SentimentAnalysis from "@/components/features/sentiment/SentimentAnalysis/SentimentAnalysis";
+import { SkeletonList } from "@/components/ui/Skeleton";
+import ErrorState from "@/components/ui/ErrorState/ErrorState";
 
 export default function FavoritesPage() {
 	const {
@@ -15,10 +16,22 @@ export default function FavoritesPage() {
 		updateFavorite,
 		isRemoving,
 		isUpdating,
+		error,
+		retry,
 	} = useFavorites();
 
 	const { data: sentimentData, isLoading: isLoadingSentiment } =
 		useSentimentAnalysis(favorites);
+
+	if (error) {
+		return (
+			<ErrorState
+				title="Error Loading Favorites"
+				message="Unable to load your favorite movies"
+				onRetry={retry}
+			/>
+		);
+	}
 
 	if (isLoading) {
 		return (

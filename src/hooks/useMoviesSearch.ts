@@ -13,14 +13,15 @@ export function useMovieSearch() {
 
 	const [searchInput, setSearchInput] = useState(currentQuery);
 
-	const { data, isLoading, error, isFetching } = useQuery<MovieSearchResponse>({
-		queryKey: ["movies", currentQuery, currentPage],
-		queryFn: () => searchMovies(currentQuery, currentPage),
-		enabled: Boolean(currentQuery),
-		staleTime: 1000 * 60 * 5,
-		placeholderData: (previousData) => previousData,
-		gcTime: 1000 * 60 * 5,
-	});
+	const { data, isLoading, error, isFetching, refetch } =
+		useQuery<MovieSearchResponse>({
+			queryKey: ["movies", currentQuery, currentPage],
+			queryFn: () => searchMovies(currentQuery, currentPage),
+			enabled: Boolean(currentQuery),
+			staleTime: 1000 * 60 * 5,
+			placeholderData: (previousData) => previousData,
+			gcTime: 1000 * 60 * 5,
+		});
 
 	const totalPages = data?.totalResults
 		? Math.ceil(Number(data.totalResults) / 10)
@@ -66,5 +67,6 @@ export function useMovieSearch() {
 		handleSearch,
 		handleKeyPress,
 		handlePageChange,
+		retry: () => refetch(),
 	};
 }

@@ -6,6 +6,7 @@ import { useMovieSearch } from "@/hooks/useMoviesSearch";
 import MovieCard from "@/features/movies/MovieCard";
 import { SkeletonList } from "@/ui/Skeleton";
 import Pagination from "@/ui/Pagination";
+import ErrorState from "@/components/ui/ErrorState/ErrorState";
 
 import { EmptyState } from "./EmptyState";
 
@@ -17,6 +18,7 @@ export default function MovieList() {
 		currentPage,
 		totalPages,
 		handlePageChange,
+		retry: handleRetry
 	} = useMovieSearch();
 
 	if (isLoading) {
@@ -25,9 +27,12 @@ export default function MovieList() {
 
 	if (error instanceof Error) {
 		return (
-			<p className="text-red-500 mt-2 lg:mt-12 text-center text-3xl font-bold">
-				{error.message}
-			</p>
+			<ErrorState
+				title="Error Loading Movies"
+				message={error.message}
+				onRetry={handleRetry}
+				className="mt-8"
+			/>
 		);
 	}
 

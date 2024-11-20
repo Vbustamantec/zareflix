@@ -8,6 +8,7 @@ import QueryClientContext from "context/QueryClientContext";
 import Header from "@/layout/Header/Header";
 import Footer from "@/layout/Footer/Footer";
 import AutoSync from "@/features/auth/AutoSync/AutoSync";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 import "./globals.css";
 
@@ -35,10 +36,12 @@ export default function RootLayout({
 			>
 				<QueryClientContext>
 					<UserProvider>
-						<AutoSync />
-						<Header />
-						<main className="flex-grow pt-16">{children}</main>
-						<Footer />
+						<ErrorBoundary>
+							<AutoSync />
+							<Header />
+							<main className="flex-grow pt-16">{children}</main>
+							<Footer />
+						</ErrorBoundary>
 					</UserProvider>
 				</QueryClientContext>
 			</body>

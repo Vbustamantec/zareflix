@@ -1,16 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { RecommendationResponse } from "@/types/movies";
+import { APIError } from "@/components/ui/ErrorBoundary/ErrorBoundary";
 
 export function useRecommendations(movieId: string) {
-	const { data, isLoading, error } = useQuery<RecommendationResponse>({
+	const { data, isLoading, error, refetch } = useQuery<RecommendationResponse>({
 		queryKey: ["recommendations", movieId],
 		queryFn: async () => {
 			const response = await fetch(
 				`${process.env.NEXT_PUBLIC_BACKEND_URL}/recommendations/${movieId}`
 			);
 			if (!response.ok) {
-				throw new Error("Failed to fetch recommendations");
+				throw new APIError("Failed to fetch recommendations");
 			}
+
 			const data = await response.json();
 			return data.data;
 		},
@@ -22,5 +24,6 @@ export function useRecommendations(movieId: string) {
 		movies: data?.recommendations || [],
 		isLoading,
 		error,
+		retry: () => refetch(),
 	};
 }

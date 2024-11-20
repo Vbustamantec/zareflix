@@ -2,6 +2,7 @@ import React from "react";
 import { SkeletonList } from "@/ui/Skeleton";
 import MovieRecommendationPresentation from "./MovieRecommendationPresentation";
 import { useRecommendations } from "@/hooks/useRecommendations";
+import ErrorState from "@/components/ui/ErrorState/ErrorState";
 
 interface MovieRecommendationsProps {
 	movieId: string;
@@ -10,7 +11,23 @@ interface MovieRecommendationsProps {
 export default function MovieRecommendationsContainer({
 	movieId,
 }: MovieRecommendationsProps) {
-	const { movies, isLoading } = useRecommendations(movieId);
+	const {
+		movies,
+		isLoading,
+		error,
+		retry: handleRetry,
+	} = useRecommendations(movieId);
+
+	if (error) {
+		return (
+			<ErrorState
+				title="Error Loading Recommendations"
+				message="Unable to load movie recommendations"
+				onRetry={handleRetry}
+				showHomeButton={false}
+			/>
+		);
+	}
 
 	if (isLoading) {
 		return (

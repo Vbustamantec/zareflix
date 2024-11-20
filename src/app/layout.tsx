@@ -5,8 +5,6 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 import QueryClientContext from "context/QueryClientContext";
 
-import ErrorBoundary from "@/components/ui/ErrorBoundary";
-
 const Header = lazy(() => import("@/layout/Header/Header"));
 const Footer = lazy(() => import("@/layout/Footer/Footer"));
 const AutoSync = lazy(() => import("@/features/auth/AutoSync/AutoSync"));
@@ -39,19 +37,17 @@ export default function RootLayout({
 			>
 				<QueryClientContext>
 					<UserProvider>
-						<ErrorBoundary>
-							<Suspense fallback={<Loader />}>
-								<Header />
-							</Suspense>
+						<Suspense fallback={<Loader />}>
+							<Header />
+						</Suspense>
 
-							<Suspense fallback={<Loader />}>
-								<AutoSync />
-							</Suspense>
-							<main className="flex-grow pt-16">{children}</main>
-							<Suspense fallback={<Loader />}>
-								<Footer />
-							</Suspense>
-						</ErrorBoundary>
+						<Suspense fallback={<Loader />}>
+							<AutoSync />
+						</Suspense>
+						<main className="flex-grow pt-16">{children}</main>
+						<Suspense fallback={<Loader />}>
+							<Footer />
+						</Suspense>
 					</UserProvider>
 				</QueryClientContext>
 			</body>
